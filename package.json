@@ -2,18 +2,26 @@
   "name": "insomnia-plugin-save-variables",
   "version": "1.0.0",
   "description": "An Insomnia Plugin that saves values from responses into variables",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "start": "tsc && node dist/index.js",
     "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/georgeflug/insomnia-plugin-save-variables.git"
   },
+  "files": [
+    "/dist"
+  ],
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/georgeflug/insomnia-plugin-save-variables/issues"
   },
-  "homepage": "https://github.com/georgeflug/insomnia-plugin-save-variables#readme"
+  "homepage": "https://github.com/georgeflug/insomnia-plugin-save-variables#readme",
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  }
 }
