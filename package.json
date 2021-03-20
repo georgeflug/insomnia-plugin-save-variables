@@ -9,6 +9,11 @@
     "start": "tsc && node dist/index.js",
     "test": "jest"
   },
+  "insomnia": {                    
+    "name": "save-variables",
+    "displayName": "Save Variables",
+    "description": "Saves values from responses into variables"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/georgeflug/insomnia-plugin-save-variables.git"
