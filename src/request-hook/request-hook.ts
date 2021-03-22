@@ -2,6 +2,6 @@ export const variableDeclarationHeaderRequestHook: Insomnia.RequestHook = async 
   const headerValue = context.request.getHeader('X-Save-Variable')
   if (headerValue) {
     context.request.removeHeader('X-Save-Variable')
-    context.store.setItem('saved-variable', headerValue)
+    await context.store.setItem('saved-variable', headerValue)
   }
 }
