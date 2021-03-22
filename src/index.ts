@@ -20,3 +20,9 @@ export const templateTags = [{
       return Math.round(min + Math.random() * (max - min));
   }
 }] as Insomnia.TemplateTag[]
+
+export const requestHooks = [
+    (context: Insomnia.RequestHookContext) => {
+        console.log('Request hook fired!')
+    }
+] as Insomnia.RequestHook[]
