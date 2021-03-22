@@ -1,4 +1,5 @@
 import { variableDeclarationHeaderRequestHook } from "./request-hook/request-hook";
+import { variableSavingResponseHook } from "./response-hook/response-hook";
 
 export const templateTags = [{
   name: 'random',
@@ -26,3 +27,7 @@ export const templateTags = [{
 export const requestHooks = [
     variableDeclarationHeaderRequestHook
 ] as Insomnia.RequestHook[]
+
+export const responseHooks = [
+    variableSavingResponseHook
+] as Insomnia.ResponseHook[]
