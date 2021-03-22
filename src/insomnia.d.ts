@@ -88,13 +88,23 @@ declare module Insomnia {
     getHeader(name: string): string | Array<string> | null
     hasHeader(name: string): boolean
   }
+  export type StoreContext = {
+    hasItem(key: string): Promise<boolean>
+    setItem(key: string, value: string): Promise<void>
+    getItem(key: string): Promise<string | null>
+    removeItem(key: string): Promise<void>
+    clear(): Promise<void>
+    all(): Promise<Array<{ key: string, value: string }>>
+  }
   export type RequestHookContext = {
     app: AppContext
     request: RequestContext
+    store: StoreContext
   }
   export type ResponseHookContext = {
     app: AppContext
     response: ResponseContext
+    store: StoreContext
   }
   export type RequestHook = (context: RequestHookContext) => void
   export type ResponseHook = (context: ResponseHookContext) => void
