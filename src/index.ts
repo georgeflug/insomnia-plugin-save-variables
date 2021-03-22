@@ -1,3 +1,5 @@
+import { variableDeclarationHeaderRequestHook } from "./request-hook/request-hook";
+
 export const templateTags = [{
   name: 'random',
   displayName: 'Random Integer',
@@ -22,7 +24,5 @@ export const templateTags = [{
 }] as Insomnia.TemplateTag[]
 
 export const requestHooks = [
-    (context: Insomnia.RequestHookContext) => {
-        console.log('Request hook fired!')
-    }
+    variableDeclarationHeaderRequestHook
 ] as Insomnia.RequestHook[]
