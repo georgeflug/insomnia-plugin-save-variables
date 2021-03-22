@@ -19,8 +19,8 @@ describe('Variable Declaration Header Request Hook', () => {
 
     variableDeclarationHeaderRequestHook(context)
 
-    expect(getHeaderMock).toHaveBeenCalledWith('X-save-variable')
-    expect(removeHeaderMock).toHaveBeenCalledWith('X-save-variable')
+    expect(getHeaderMock).toHaveBeenCalledWith('X-Save-Variable')
+    expect(removeHeaderMock).toHaveBeenCalledWith('X-Save-Variable')
   })
 
   it('should not remove the custom header from the request if it is not present', () => {
@@ -28,7 +28,7 @@ describe('Variable Declaration Header Request Hook', () => {
 
     variableDeclarationHeaderRequestHook(context)
 
-    expect(getHeaderMock).toHaveBeenCalledWith('X-save-variable')
+    expect(getHeaderMock).toHaveBeenCalledWith('X-Save-Variable')
     expect(removeHeaderMock).not.toHaveBeenCalled()
   })
 
