@@ -1,33 +1,31 @@
-import { variableDeclarationHeaderRequestHook } from "./request-hook/request-hook";
-import { variableSavingResponseHook } from "./response-hook/response-hook";
+import { variableDeclarationHeaderRequestHook } from './request-hook/request-hook'
+import { variableSavingResponseHook } from './response-hook/response-hook'
 
-export const templateTags = [{
-  name: 'random',
-  displayName: 'Random Integer',
-  description: 'Generate random things',
-  args: [
+export const templateTags = [
+  {
+    name: 'random',
+    displayName: 'Random Integer',
+    description: 'Generate random things',
+    args: [
       {
-          displayName: 'Minimum',
-          description: 'Minimum potential value',
-          type: 'number',
-          defaultValue: 0
-      }, 
+        displayName: 'Minimum',
+        description: 'Minimum potential value',
+        type: 'number',
+        defaultValue: 0,
+      },
       {
-          displayName: 'Maximum',
-          description: 'Maximum potential value',
-          type: 'number',
-          defaultValue: 100
-      }
-  ],
-  async run (context: unknown, min: number, max: number): Promise<unknown> {
-      return Math.round(min + Math.random() * (max - min));
-  }
-}] as Insomnia.TemplateTag[]
+        displayName: 'Maximum',
+        description: 'Maximum potential value',
+        type: 'number',
+        defaultValue: 100,
+      },
+    ],
+    async run(context: unknown, min: number, max: number): Promise<unknown> {
+      return Math.round(min + Math.random() * (max - min))
+    },
+  },
+] as Insomnia.TemplateTag[]
 
-export const requestHooks = [
-    variableDeclarationHeaderRequestHook
-] as Insomnia.RequestHook[]
+export const requestHooks = [variableDeclarationHeaderRequestHook] as Insomnia.RequestHook[]
 
-export const responseHooks = [
-    variableSavingResponseHook
-] as Insomnia.ResponseHook[]
+export const responseHooks = [variableSavingResponseHook] as Insomnia.ResponseHook[]

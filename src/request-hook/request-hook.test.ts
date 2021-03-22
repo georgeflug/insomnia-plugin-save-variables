@@ -1,18 +1,18 @@
-import { variableDeclarationHeaderRequestHook } from "./request-hook"
+import { variableDeclarationHeaderRequestHook } from './request-hook'
 
 describe('Variable Declaration Header Request Hook', () => {
   const getHeaderMock = jest.fn()
   const removeHeaderMock = jest.fn()
   const storeSetItemMock = jest.fn()
-  const context = {
-    request: {
+  const context = ({
+    request: ({
       getHeader: getHeaderMock,
       removeHeader: removeHeaderMock,
-    } as Partial<Insomnia.RequestContext> as Insomnia.RequestContext,
-    store: {
-      setItem: storeSetItemMock
-    } as Partial<Insomnia.StoreContext> as Insomnia.StoreContext
-  } as Partial<Insomnia.RequestHookContext> as Insomnia.RequestHookContext
+    } as Partial<Insomnia.RequestContext>) as Insomnia.RequestContext,
+    store: ({
+      setItem: storeSetItemMock,
+    } as Partial<Insomnia.StoreContext>) as Insomnia.StoreContext,
+  } as Partial<Insomnia.RequestHookContext>) as Insomnia.RequestHookContext
 
   it('should remove the custom header from the request when it is present', async () => {
     getHeaderMock.mockReturnValue('this is the header value')
@@ -40,5 +40,4 @@ describe('Variable Declaration Header Request Hook', () => {
 
     expect(storeSetItemMock).toHaveBeenCalledWith('saved-variable', headerValue)
   })
-
 })
