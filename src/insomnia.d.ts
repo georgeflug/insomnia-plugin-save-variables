@@ -106,6 +106,6 @@ declare module Insomnia {
     response: ResponseContext
     store: StoreContext
   }
-  export type RequestHook = (context: RequestHookContext) => void
-  export type ResponseHook = (context: ResponseHookContext) => void
+  export type RequestHook = (context: RequestHookContext) => Promise<void>
+  export type ResponseHook = (context: ResponseHookContext) => Promise<void>
 }

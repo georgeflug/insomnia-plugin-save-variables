@@ -14,29 +14,29 @@ describe('Variable Declaration Header Request Hook', () => {
     } as Partial<Insomnia.StoreContext> as Insomnia.StoreContext
   } as Partial<Insomnia.RequestHookContext> as Insomnia.RequestHookContext
 
-  it('should remove the custom header from the request when it is present', () => {
+  it('should remove the custom header from the request when it is present', async () => {
     getHeaderMock.mockReturnValue('this is the header value')
 
-    variableDeclarationHeaderRequestHook(context)
+    await variableDeclarationHeaderRequestHook(context)
 
     expect(getHeaderMock).toHaveBeenCalledWith('X-Save-Variable')
     expect(removeHeaderMock).toHaveBeenCalledWith('X-Save-Variable')
   })
 
-  it('should not remove the custom header from the request if it is not present', () => {
+  it('should not remove the custom header from the request if it is not present', async () => {
     getHeaderMock.mockReturnValue(null)
 
-    variableDeclarationHeaderRequestHook(context)
+    await variableDeclarationHeaderRequestHook(context)
 
     expect(getHeaderMock).toHaveBeenCalledWith('X-Save-Variable')
     expect(removeHeaderMock).not.toHaveBeenCalled()
   })
 
-  it('should save the custom header value for the response hook to read later', () => {
+  it('should save the custom header value for the response hook to read later', async () => {
     const headerValue = 'very-important-stuff-here'
     getHeaderMock.mockReturnValue(headerValue)
 
-    variableDeclarationHeaderRequestHook(context)
+    await variableDeclarationHeaderRequestHook(context)
 
     expect(storeSetItemMock).toHaveBeenCalledWith('saved-variable', headerValue)
   })
