@@ -14,26 +14,26 @@ declare namespace Insomnia {
       defaultValue: string | number | boolean
       type: 'string' | 'number' | 'enum' | 'model' | 'boolean'
 
-      // Only type === 'string'
+      // Used when type === 'string'
       placeholder?: string
 
-      // Only type === 'model'
-      modelType: string
+      // Used when type === 'model'
+      modelType?: string
 
-      // Only type === 'enum'
-      options: Array<{
+      // Used when type === 'enum'
+      options?: Array<{
         displayName: string
         value: string
         description?: string
         placeholder?: string
       }>
     }>
-    actions: Array<{
+    actions?: Array<{
       name: string
       icon?: string
       run?: (context: unknown) => Promise<void>
     }>
-    run?: (context: unknown, ...args: unknown[]) => Promise<unknown>
+    run: (context: TemplateRunContext, ...args: unknown[]) => Promise<unknown>
   }
   export type AppContext = {
     alert(title: string, message?: string): Promise<void>
@@ -97,6 +97,10 @@ declare namespace Insomnia {
     removeItem(key: string): Promise<void>
     clear(): Promise<void>
     all(): Promise<Array<{ key: string; value: string }>>
+  }
+  export type TemplateRunContext = {
+    app: AppContext
+    store: StoreContext
   }
   export type RequestHookContext = {
     app: AppContext
