@@ -4,7 +4,7 @@ export const savedVariableTemplateTag: Insomnia.TemplateTag = {
   args: [
     {
       displayName: 'Variable Name',
-      defaultValue: 'test',
+      defaultValue: '',
       type: 'string',
     },
   ],
