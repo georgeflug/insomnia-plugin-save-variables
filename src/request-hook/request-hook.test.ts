@@ -38,6 +38,6 @@ describe('Variable Declaration Header Request Hook', () => {
 
     await variableDeclarationHeaderRequestHook(context)
 
-    expect(storeSetItemMock).toHaveBeenCalledWith('saved-variable', headerValue)
+    expect(storeSetItemMock).toHaveBeenCalledWith('variable-savedHeader', headerValue)
   })
 })
