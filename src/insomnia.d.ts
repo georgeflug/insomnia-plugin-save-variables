@@ -1,4 +1,33 @@
 declare namespace Insomnia {
+  export type TemplateTagArg = {
+    displayName: string
+    description?: string
+    defaultValue: string | number | boolean
+    type: 'string' | 'number' | 'enum' | 'model' | 'boolean'
+  }
+  export type TemplateTagStringArg = TemplateTagArg & {
+    type: 'string'
+    placeholder?: string
+  }
+  export type TemplateTagNumberArg = TemplateTagArg & {
+    type: 'number'
+  }
+  export type TemplateTagModelArg = TemplateTagArg & {
+    type: 'model'
+    modelType?: string
+  }
+  export type TemplateTagEnumArg = TemplateTagArg & {
+    type: 'enum'
+    options?: Array<{
+      displayName: string
+      value: string
+      description?: string
+      placeholder?: string
+    }>
+  }
+  export type TemplateTagBooleanArg = TemplateTagArg & {
+    type: 'boolean'
+  }
   export type TemplateTag = {
     name: string
     displayName: string
@@ -8,26 +37,9 @@ declare namespace Insomnia {
     liveDisplayName?: (args: unknown) => string | undefined
     validate?: (value: unknown) => string | undefined
     priority?: number
-    args: Array<{
-      displayName: string
-      description?: string
-      defaultValue: string | number | boolean
-      type: 'string' | 'number' | 'enum' | 'model' | 'boolean'
-
-      // Used when type === 'string'
-      placeholder?: string
-
-      // Used when type === 'model'
-      modelType?: string
-
-      // Used when type === 'enum'
-      options?: Array<{
-        displayName: string
-        value: string
-        description?: string
-        placeholder?: string
-      }>
-    }>
+    args: Array<
+      TemplateTagStringArg | TemplateTagNumberArg | TemplateTagModelArg | TemplateTagEnumArg | TemplateTagBooleanArg
+    >
     actions?: Array<{
       name: string
       icon?: string

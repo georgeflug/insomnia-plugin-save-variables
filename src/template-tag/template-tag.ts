@@ -5,7 +5,7 @@ export const savedVariableTemplateTag: Insomnia.TemplateTag = {
     {
       displayName: 'Variable Name',
       defaultValue: 'test',
-      type: 'string',
+      type: 'model',
     },
   ],
   run: async (context: Insomnia.TemplateRunContext, variableNameArg: unknown) => {
