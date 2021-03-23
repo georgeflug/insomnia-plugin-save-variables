@@ -34,7 +34,7 @@ declare namespace Insomnia {
     disablePreview?: () => boolean
     description?: string
     deprecated?: boolean
-    liveDisplayName?: (args: unknown) => string | undefined
+    liveDisplayName?: (args: LiveDisplayArg[]) => string | undefined
     validate?: (value: unknown) => string | undefined
     priority?: number
     args: Array<
@@ -60,6 +60,11 @@ declare namespace Insomnia {
     ): Promise<string>
     getPath(name: 'desktop'): string
     showSaveDialog(options: { defaultPath?: string }): Promise<string | null>
+  }
+  export type LiveDisplayArg = {
+    quotedBy: string
+    type: string
+    value: string
   }
   export type RequestContext = {
     getId(): string
