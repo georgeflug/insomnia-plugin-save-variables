@@ -18,6 +18,6 @@ describe('Variable Saving Response Hook', () => {
 
     await variableSavingResponseHook(context)
 
-    expect(storeSetItemMock).toHaveBeenCalledWith('my-variable', statusCode.toString())
+    expect(storeSetItemMock).toHaveBeenCalledWith('variable-statusCode', statusCode.toString())
   })
 })
