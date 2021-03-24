@@ -43,7 +43,7 @@ declare namespace Insomnia {
     actions?: Array<{
       name: string
       icon?: string
-      run?: (context: unknown) => Promise<void>
+      run?: (context: TemplateActionContext) => Promise<void>
     }>
     run: (context: TemplateRunContext, ...args: unknown[]) => Promise<unknown>
   }
@@ -114,6 +114,9 @@ declare namespace Insomnia {
     removeItem(key: string): Promise<void>
     clear(): Promise<void>
     all(): Promise<Array<{ key: string; value: string }>>
+  }
+  export type TemplateActionContext = {
+    store: StoreContext
   }
   export type TemplateRunContext = {
     app: AppContext
