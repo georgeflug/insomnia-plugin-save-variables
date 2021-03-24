@@ -1,3 +1,5 @@
+import { createCustomHeader } from '../custom-header-format/custom-header-format'
+
 export const definitionTemplateTag: Insomnia.TemplateTag = {
   name: 'savevariable',
   displayName: 'Save Variable',
@@ -16,6 +18,6 @@ export const definitionTemplateTag: Insomnia.TemplateTag = {
   run: async (context: Insomnia.TemplateRunContext, variableNameArg: unknown, jsonPathArg: unknown) => {
     const variableName = variableNameArg as string
     const jsonPath = jsonPathArg as string
-    return `X-Save-Variable-${variableName}-${jsonPath}`
+    return createCustomHeader({ variableName, jsonPath })
   },
 }

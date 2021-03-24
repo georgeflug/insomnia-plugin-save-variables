@@ -6,6 +6,6 @@ describe('Definition Template Tag', () => {
   it('should return formatted header name', async () => {
     const result = await definitionTemplateTag.run(context, 'ticketId', '$.id')
 
-    expect(result).toEqual('X-Save-Variable-ticketId-$.id')
+    expect(result).toEqual('X-Save-Variable-dGlja2V0SWQ=-JC5pZA==')
   })
 })
