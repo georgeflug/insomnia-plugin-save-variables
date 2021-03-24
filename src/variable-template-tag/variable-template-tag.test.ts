@@ -1,4 +1,4 @@
-import { savedVariableTemplateTag } from './template-tag'
+import { savedVariableTemplateTag } from './variable-template-tag'
 
 describe('Saved Variable Template Tag', () => {
   const storeGetItemMock = jest.fn()
