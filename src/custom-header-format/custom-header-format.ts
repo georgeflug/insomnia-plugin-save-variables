@@ -6,13 +6,13 @@ export function isCustomHeader(headerName: string): boolean {
   return headerName.startsWith(headerPrefix)
 }
 
-export function createHeader(variableDefinition: VariableDefinition): string {
+export function createCustomHeader(variableDefinition: VariableDefinition): string {
   const name = base64Encode(variableDefinition.variableName)
   const path = base64Encode(variableDefinition.jsonPath)
   return `${headerPrefix}-${name}-${path}`
 }
 
-export function parseHeader(headerName: string): VariableDefinition {
+export function parseCustomHeader(headerName: string): VariableDefinition {
   const parts = headerName.split('-')
   return {
     variableName: base64Decode(parts[3]),

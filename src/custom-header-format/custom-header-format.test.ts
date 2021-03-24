@@ -1,4 +1,4 @@
-import { createHeader, isCustomHeader, parseHeader } from './custom-header-format'
+import { createCustomHeader, isCustomHeader, parseCustomHeader } from './custom-header-format'
 import { VariableDefinition } from './variable-definition'
 
 describe('Custom Header Format', () => {
@@ -8,8 +8,8 @@ describe('Custom Header Format', () => {
       jsonPath: '$.test',
     } as VariableDefinition
 
-    const header = createHeader(variableDefinition)
-    const parsed = parseHeader(header)
+    const header = createCustomHeader(variableDefinition)
+    const parsed = parseCustomHeader(header)
     const isCustom = isCustomHeader(header)
 
     expect(parsed).toEqual(variableDefinition)
@@ -22,8 +22,8 @@ describe('Custom Header Format', () => {
       jsonPath: '$.test-key',
     } as VariableDefinition
 
-    const header = createHeader(variableDefinition)
-    const parsed = parseHeader(header)
+    const header = createCustomHeader(variableDefinition)
+    const parsed = parseCustomHeader(header)
     const isCustom = isCustomHeader(header)
 
     expect(parsed).toEqual(variableDefinition)
