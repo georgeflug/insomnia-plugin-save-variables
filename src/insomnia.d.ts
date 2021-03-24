@@ -66,13 +66,17 @@ declare namespace Insomnia {
     type: string
     value: string
   }
+  export type Header = {
+    name: string
+    value: string
+  }
   export type RequestContext = {
     getId(): string
     getName(): string
     getUrl(): string
     setUrl(url: string): void
     getMethod(): string
-    getHeaders(): Array<{ name: string; value: string }>
+    getHeaders(): Header[]
     getHeader(name: string): string | null
     hasHeader(name: string): boolean
     removeHeader(name: string): void
