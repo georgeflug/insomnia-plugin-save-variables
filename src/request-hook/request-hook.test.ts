@@ -49,9 +49,6 @@ describe('Variable Declaration Header Request Hook', () => {
 
     await variableDeclarationHeaderRequestHook(context)
 
-    expect(storeSetItemMock).toHaveBeenCalledWith(
-      `variable-${variableDefinition.variableName}`,
-      variableDefinition.jsonPath,
-    )
+    expect(storeSetItemMock).toHaveBeenCalledWith('variableDefinitions', JSON.stringify([variableDefinition]))
   })
 })

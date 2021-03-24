@@ -4,12 +4,11 @@ export const variableDeclarationHeaderRequestHook: Insomnia.RequestHook = async 
   context: Insomnia.RequestHookContext,
 ) => {
   const headers = context.request.getHeaders()
-  const promises = headers
+  const variableDefinitions = headers
     .filter(header => isCustomHeader(header.name))
-    .map(async header => {
+    .map(header => {
       context.request.removeHeader(header.name)
-      const variableDefinition = parseCustomHeader(header.name)
-      await context.store.setItem(`variable-${variableDefinition.variableName}`, variableDefinition.jsonPath)
+      return parseCustomHeader(header.name)
     })
-  await Promise.all(promises)
+  await context.store.setItem('variableDefinitions', JSON.stringify(variableDefinitions))
 }
