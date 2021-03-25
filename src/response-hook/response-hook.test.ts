@@ -61,4 +61,50 @@ describe('Variable Saving Response Hook', () => {
 
     expect(storeRemoveItemMock).toHaveBeenCalledWith('variableDefinitions')
   })
+
+  it('should not save variable if key cannot be found at path specified by json path', async () => {
+    const VariableDefinition: VariableDefinition = {
+      variableName: 'ticket',
+      jsonPath: '$.doesNotExist',
+    }
+    const body = {
+      ticketId: '123',
+    }
+    storeGetItemMock.mockResolvedValue(JSON.stringify([VariableDefinition]))
+    getBodyMock.mockReturnValue(JSON.stringify(body))
+
+    await variableSavingResponseHook(context)
+
+    expect(storeSetItemMock).not.toHaveBeenCalled()
+  })
+
+  it('should save variable if value at key is expicitly null', async () => {
+    const VariableDefinition: VariableDefinition = {
+      variableName: 'ticket',
+      jsonPath: '$.ticketId',
+    }
+    const body = {
+      ticketId: null,
+    }
+    storeGetItemMock.mockResolvedValue(JSON.stringify([VariableDefinition]))
+    getBodyMock.mockReturnValue(JSON.stringify(body))
+
+    await variableSavingResponseHook(context)
+
+    expect(storeSetItemMock).toHaveBeenCalledWith('variable-ticket', null)
+  })
+
+  it('should not save variable if response body cannot be parsed as json', async () => {
+    const VariableDefinition: VariableDefinition = {
+      variableName: 'ticket',
+      jsonPath: '$.ticketId',
+    }
+    const body = 'Hello. I am not JSON'
+    storeGetItemMock.mockResolvedValue(JSON.stringify([VariableDefinition]))
+    getBodyMock.mockReturnValue(JSON.stringify(body))
+
+    await variableSavingResponseHook(context)
+
+    expect(storeSetItemMock).not.toHaveBeenCalled()
+  })
 })

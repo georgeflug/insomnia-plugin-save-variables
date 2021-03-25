@@ -5,9 +5,13 @@ export const variableSavingResponseHook: Insomnia.ResponseHook = async (context:
   const serializedDefinitions = await context.store.getItem('variableDefinitions')
   await context.store.removeItem('variableDefinitions')
   if (serializedDefinitions) {
-    const definitions = JSON.parse(serializedDefinitions) as VariableDefinition[]
-    const response = JSON.parse((context.response.getBody() || '').toString())
-    await extractVariablesFromResponse(definitions, response, context)
+    try {
+      const definitions = JSON.parse(serializedDefinitions) as VariableDefinition[]
+      const response = JSON.parse((context.response.getBody() || '').toString())
+      await extractVariablesFromResponse(definitions, response, context)
+    } catch (e) {
+      console.log('Save Variables Plugin Response Hook Error', e)
+    }
   }
 }
 
@@ -17,8 +21,11 @@ async function extractVariablesFromResponse(
   context: Insomnia.ResponseHookContext,
 ) {
   const promises = definitions.map(async def => {
-    const value = jsonpath.query(response, def.jsonPath)
-    await context.store.setItem(`variable-${def.variableName}`, value.toString())
+    const value = jsonpath.value(response, def.jsonPath)
+    if (value !== undefined) {
+      const result = value === null ? null : value.toString()
+      await context.store.setItem(`variable-${def.variableName}`, result)
+    }
   })
   await Promise.all(promises)
 }
