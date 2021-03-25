@@ -1,28 +1,16 @@
+import { createMockStore } from '../insomnia/store-mock'
 import { allVariablesTemplateTag } from './all-variables-template-tag'
 
 describe('All Variables Template Tag', () => {
-  const storeGetAllItemsMock = jest.fn()
+  const store = createMockStore()
   const context = ({
-    store: ({
-      all: storeGetAllItemsMock,
-    } as Partial<Insomnia.StoreContext>) as Insomnia.StoreContext,
+    store,
   } as Partial<Insomnia.TemplateRunContext>) as Insomnia.TemplateRunContext
 
   it('should return the requested variable', async () => {
-    storeGetAllItemsMock.mockResolvedValue([
-      {
-        key: 'variable-firstVariable',
-        value: 'firstValue',
-      },
-      {
-        key: 'variable-secondVariable',
-        value: 'secondValue',
-      },
-      {
-        key: 'somethingElse',
-        value: 'someValue',
-      },
-    ])
+    await store.setItem('variable-firstVariable', 'firstValue')
+    await store.setItem('variable-secondVariable', 'secondValue')
+    await store.setItem('somethingElse', 'someValue')
 
     const result = await allVariablesTemplateTag.run(context)
 
