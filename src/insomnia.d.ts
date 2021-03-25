@@ -37,7 +37,7 @@ declare namespace Insomnia {
     liveDisplayName?: (args: LiveDisplayArg[]) => string | undefined
     validate?: (value: unknown) => string | undefined
     priority?: number
-    args: Array<
+    args?: Array<
       TemplateTagStringArg | TemplateTagNumberArg | TemplateTagModelArg | TemplateTagEnumArg | TemplateTagBooleanArg
     >
     actions?: Array<{
