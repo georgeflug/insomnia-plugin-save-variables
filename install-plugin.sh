@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script performs an initial or a clean install of the plugin into Insomnia.
+
 set -a
 source .env
 set +a
@@ -13,3 +15,5 @@ mkdir -p "$MY_PLUGIN_DIR"
 
 cp package.json "$MY_PLUGIN_DIR/package.json"
 cp -r dist "$MY_PLUGIN_DIR/dist"
+
+(cd $MY_PLUGIN_DIR; npm install --only=production)
