@@ -31,6 +31,7 @@
   "homepage": "https://github.com/georgeflug/insomnia-plugin-save-variables#readme",
   "devDependencies": {
     "@types/jest": "^26.0.21",
+    "@types/jsonpath": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "eslint": "^7.22.0",
@@ -41,5 +42,8 @@
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.4",
     "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "jsonpath": "^1.1.0"
   }
 }
