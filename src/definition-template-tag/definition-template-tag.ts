@@ -3,6 +3,9 @@ import { createCustomHeader } from '../custom-header-format/custom-header-format
 export const definitionTemplateTag: Insomnia.TemplateTag = {
   name: 'savevariable',
   displayName: 'Save Variable',
+  liveDisplayName: (args: Insomnia.LiveDisplayArg[]) => {
+    return `Save Variable - ${args[0].value}`
+  },
   args: [
     {
       displayName: 'Variable Name',

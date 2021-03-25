@@ -1,8 +1,8 @@
 export const savedVariableTemplateTag: Insomnia.TemplateTag = {
   name: 'variable',
-  displayName: 'Saved Variable',
+  displayName: 'Variable',
   liveDisplayName: (args: Insomnia.LiveDisplayArg[]) => {
-    return `Saved Variable - ${args[0].value}`
+    return `Variable - ${args[0].value}`
   },
   args: [
     {
