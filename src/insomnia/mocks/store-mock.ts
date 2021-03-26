@@ -1,4 +1,6 @@
-export function createMockStore(): Insomnia.StoreContext {
+import { StoreContext } from '../types/store-context'
+
+export function createMockStore(): StoreContext {
   const items = new Map()
 
   return {

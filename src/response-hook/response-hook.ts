@@ -1,7 +1,9 @@
 import jsonpath from 'jsonpath'
 import { VariableDefinition } from '../custom-header-format/variable-definition'
+import { ResponseHook } from '../insomnia/types/response-hook'
+import { ResponseHookContext } from '../insomnia/types/response-hook-context'
 
-export const variableSavingResponseHook: Insomnia.ResponseHook = async (context: Insomnia.ResponseHookContext) => {
+export const variableSavingResponseHook: ResponseHook = async (context: ResponseHookContext) => {
   const serializedDefinitions = await context.store.getItem('variableDefinitions')
   await context.store.removeItem('variableDefinitions')
   if (serializedDefinitions) {
@@ -18,7 +20,7 @@ export const variableSavingResponseHook: Insomnia.ResponseHook = async (context:
 async function extractVariablesFromResponse(
   definitions: VariableDefinition[],
   response: unknown,
-  context: Insomnia.ResponseHookContext,
+  context: ResponseHookContext,
 ) {
   const promises = definitions.map(async def => {
     const value = jsonpath.value(response, def.jsonPath)

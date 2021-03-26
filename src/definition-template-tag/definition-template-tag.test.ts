@@ -1,7 +1,8 @@
+import { TemplateRunContext } from '../insomnia/types/template-context'
 import { definitionTemplateTag } from './definition-template-tag'
 
 describe('Definition Template Tag', () => {
-  const context = {} as Insomnia.TemplateRunContext
+  const context = {} as TemplateRunContext
 
   it('should return formatted header name', async () => {
     const result = await definitionTemplateTag.run(context, 'ticketId', '$.id')

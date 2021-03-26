@@ -2,21 +2,23 @@ import { createCustomHeader } from '../custom-header-format/custom-header-format
 import { VariableDefinition } from '../custom-header-format/variable-definition'
 import { createMockHeaders } from '../insomnia/mocks/headers-mock'
 import { createMockStore } from '../insomnia/mocks/store-mock'
+import { RequestContextHeaders, RequestContext } from '../insomnia/types/request-context'
+import { RequestHookContext } from '../insomnia/types/request-hook-context'
 import { variableDeclarationHeaderRequestHook } from './request-hook'
 
 describe('Variable Declaration Header Request Hook', () => {
   const store = createMockStore()
-  let headers: Insomnia.RequestContextHeaders
-  let context: Insomnia.RequestHookContext
+  let headers: RequestContextHeaders
+  let context: RequestHookContext
 
   beforeEach(() => {
     headers = createMockHeaders()
     context = ({
       request: ({
         ...headers,
-      } as Partial<Insomnia.RequestContext>) as Insomnia.RequestContext,
+      } as Partial<RequestContext>) as RequestContext,
       store,
-    } as Partial<Insomnia.RequestHookContext>) as Insomnia.RequestHookContext
+    } as Partial<RequestHookContext>) as RequestHookContext
   })
 
   it('should remove the custom header from the request when it is present', async () => {

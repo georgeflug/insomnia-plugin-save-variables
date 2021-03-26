@@ -1,11 +1,12 @@
 import { createMockStore } from '../insomnia/mocks/store-mock'
+import { TemplateRunContext } from '../insomnia/types/template-context'
 import { allVariablesTemplateTag } from './all-variables-template-tag'
 
 describe('All Variables Template Tag', () => {
   const store = createMockStore()
   const context = ({
     store,
-  } as Partial<Insomnia.TemplateRunContext>) as Insomnia.TemplateRunContext
+  } as Partial<TemplateRunContext>) as TemplateRunContext
 
   it('should return the requested variable', async () => {
     await store.setItem('variable-firstVariable', 'firstValue')

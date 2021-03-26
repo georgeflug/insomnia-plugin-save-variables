@@ -1,4 +1,6 @@
-export function createMockHeaders(): Insomnia.RequestContextHeaders {
+import { RequestContextHeaders } from '../types/request-context'
+
+export function createMockHeaders(): RequestContextHeaders {
   const items = new Map()
 
   return {

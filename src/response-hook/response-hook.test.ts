@@ -1,5 +1,7 @@
 import { VariableDefinition } from '../custom-header-format/variable-definition'
 import { createMockStore } from '../insomnia/mocks/store-mock'
+import { ResponseContext } from '../insomnia/types/response-context'
+import { ResponseHookContext } from '../insomnia/types/response-hook-context'
 import { variableSavingResponseHook } from './response-hook'
 
 describe('Variable Saving Response Hook', () => {
@@ -8,9 +10,9 @@ describe('Variable Saving Response Hook', () => {
   const context = ({
     response: ({
       getBody: getBodyMock,
-    } as Partial<Insomnia.ResponseContext>) as Insomnia.ResponseContext,
+    } as Partial<ResponseContext>) as ResponseContext,
     store,
-  } as Partial<Insomnia.ResponseHookContext>) as Insomnia.ResponseHookContext
+  } as Partial<ResponseHookContext>) as ResponseHookContext
 
   beforeEach(async () => {
     await store.clear()
