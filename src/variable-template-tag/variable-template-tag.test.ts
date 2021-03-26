@@ -1,4 +1,4 @@
-import { createMockStore } from '../insomnia/store-mock'
+import { createMockStore } from '../insomnia/mocks/store-mock'
 import { savedVariableTemplateTag } from './variable-template-tag'
 
 describe('Saved Variable Template Tag', () => {

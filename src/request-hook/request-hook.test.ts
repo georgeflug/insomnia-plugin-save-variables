@@ -1,7 +1,7 @@
 import { createCustomHeader } from '../custom-header-format/custom-header-format'
 import { VariableDefinition } from '../custom-header-format/variable-definition'
-import { createMockHeaders } from '../insomnia/headers-mock'
-import { createMockStore } from '../insomnia/store-mock'
+import { createMockHeaders } from '../insomnia/mocks/headers-mock'
+import { createMockStore } from '../insomnia/mocks/store-mock'
 import { variableDeclarationHeaderRequestHook } from './request-hook'
 
 describe('Variable Declaration Header Request Hook', () => {

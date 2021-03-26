@@ -1,5 +1,5 @@
 import { VariableDefinition } from '../custom-header-format/variable-definition'
-import { createMockStore } from '../insomnia/store-mock'
+import { createMockStore } from '../insomnia/mocks/store-mock'
 import { variableSavingResponseHook } from './response-hook'
 
 describe('Variable Saving Response Hook', () => {

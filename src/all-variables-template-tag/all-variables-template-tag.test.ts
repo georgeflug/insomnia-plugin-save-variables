@@ -1,4 +1,4 @@
-import { createMockStore } from '../insomnia/store-mock'
+import { createMockStore } from '../insomnia/mocks/store-mock'
 import { allVariablesTemplateTag } from './all-variables-template-tag'
 
 describe('All Variables Template Tag', () => {
