@@ -3,13 +3,11 @@ import { createMockStore } from '../insomnia/store-mock'
 import { variableSavingResponseHook } from './response-hook'
 
 describe('Variable Saving Response Hook', () => {
-  const getStatusCodeMock = jest.fn()
   const getBodyMock = jest.fn()
   const store = createMockStore()
   const context = ({
     response: ({
       getBody: getBodyMock,
-      getStatusCode: getStatusCodeMock,
     } as Partial<Insomnia.ResponseContext>) as Insomnia.ResponseContext,
     store,
   } as Partial<Insomnia.ResponseHookContext>) as Insomnia.ResponseHookContext
