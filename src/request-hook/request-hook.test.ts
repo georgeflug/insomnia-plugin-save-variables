@@ -1,21 +1,23 @@
 import { createCustomHeader } from '../custom-header-format/custom-header-format'
 import { VariableDefinition } from '../custom-header-format/variable-definition'
+import { createMockHeaders } from '../insomnia/headers-mock'
 import { createMockStore } from '../insomnia/store-mock'
 import { variableDeclarationHeaderRequestHook } from './request-hook'
 
 describe('Variable Declaration Header Request Hook', () => {
-  const getHeaderMock = jest.fn()
-  const getHeadersMock = jest.fn<Insomnia.Header[], any[]>()
-  const removeHeaderMock = jest.fn()
   const store = createMockStore()
-  const context = ({
-    request: ({
-      getHeader: getHeaderMock,
-      getHeaders: getHeadersMock,
-      removeHeader: removeHeaderMock,
-    } as Partial<Insomnia.RequestContext>) as Insomnia.RequestContext,
-    store,
-  } as Partial<Insomnia.RequestHookContext>) as Insomnia.RequestHookContext
+  let headers: Insomnia.RequestContextHeaders
+  let context: Insomnia.RequestHookContext
+
+  beforeEach(() => {
+    headers = createMockHeaders()
+    context = ({
+      request: ({
+        ...headers,
+      } as Partial<Insomnia.RequestContext>) as Insomnia.RequestContext,
+      store,
+    } as Partial<Insomnia.RequestHookContext>) as Insomnia.RequestHookContext
+  })
 
   it('should remove the custom header from the request when it is present', async () => {
     const variableDefinition = {
@@ -23,19 +25,19 @@ describe('Variable Declaration Header Request Hook', () => {
       jsonPath: '$.id',
     } as VariableDefinition
     const headerName = createCustomHeader(variableDefinition)
-    getHeadersMock.mockReturnValue([{ name: headerName, value: '' }])
+    headers.setHeader(headerName, 'doesNotMatter')
 
     await variableDeclarationHeaderRequestHook(context)
 
-    expect(removeHeaderMock).toHaveBeenCalledWith(headerName)
+    expect(headers.getHeaders()).toEqual([])
   })
 
   it('should not remove the custom header from the request if it is not present', async () => {
-    getHeadersMock.mockReturnValue([{ name: 'Content-type', value: 'application/json' }])
+    headers.setHeader('Content-Type', 'application/json')
 
     await variableDeclarationHeaderRequestHook(context)
 
-    expect(removeHeaderMock).not.toHaveBeenCalled()
+    expect(headers.getHeaders()).toEqual([{ name: 'Content-Type', value: 'application/json' }])
   })
 
   it('should save the custom header value for the response hook to read later', async () => {
@@ -44,7 +46,7 @@ describe('Variable Declaration Header Request Hook', () => {
       jsonPath: '$.id',
     } as VariableDefinition
     const headerName = createCustomHeader(variableDefinition)
-    getHeadersMock.mockReturnValue([{ name: headerName, value: '' }])
+    headers.setHeader(headerName, 'doesNotMatter')
 
     await variableDeclarationHeaderRequestHook(context)
 
