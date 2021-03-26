@@ -4,6 +4,7 @@ import { TemplateTag } from '../insomnia/types/template-tag'
 export const allVariablesTemplateTag: TemplateTag = {
   name: 'allvariables',
   displayName: 'All Variables',
+  description: 'show all saved variables',
   run: async (context: TemplateRunContext) => {
     const allItems = await context.store.all()
     const variables = allItems

@@ -4,6 +4,7 @@ import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
 export const savedVariableTemplateTag: TemplateTag = {
   name: 'variable',
   displayName: 'Variable',
+  description: 'use a saved variable',
   liveDisplayName: (args: LiveDisplayArg[]) => {
     return `Variable - ${args[0].value}`
   },
