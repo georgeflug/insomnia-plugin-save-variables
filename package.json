@@ -9,7 +9,9 @@
     "lint": "eslint ./src --ext .ts",
     "start": "npm run build && node dist/index.js",
     "test": "jest",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublishOnly": "rm -rf ./dist/ && npm run build",
+    "postversion": "git push && git push --tags"
   },
   "insomnia": {
     "name": "save-variables",
