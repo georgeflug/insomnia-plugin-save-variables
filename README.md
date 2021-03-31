@@ -28,18 +28,21 @@ Install the `insomnia-plugin-save-variables` plugin from Preferences > Plugins.
 
 ## How to Use It
 
-First add a custom request header to a request. This header tells the plugin
-what value from the response to save to a variable. The header is removed from
-the request before it is sent. Use the `Save Variable` tag to define the
-header using the plugin's custom format. Only the header name is important.
-The value is unused and you can leave it blank. Send the request to store the
-value into the variable.
+### Define a variable
+Start by adding a custom request header to a request using the `Save Variable`
+tag. This header tells the plugin what value from the response to save
+to a variable. Only the header name is important. The value is unused 
+and can be left blank.
+
+When the request is sent, the plugin will read and strip the header, wait
+for the response, and save the variable.
 
 ![Header Example](/images/header-example.png)
 
 ![Header Example](/images/header-example-2.png)
 
-Next use the `Variable` tag to use the saved value.
+### Use a variable
+The `Variable` tag exposes the most recent value saved to the variable.
 
 ![Variable Example](/images/variable-example.png)
 
