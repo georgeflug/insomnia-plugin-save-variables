@@ -35,7 +35,8 @@ to a variable. Only the header name is important. The value is unused
 and can be left blank.
 
 When the request is sent, the plugin will read and strip the header, wait
-for the response, and save the variable.
+for the response, and save the variable. Variable values can come from 
+the json response or from a response header.
 
 ![Header Example](/images/header-example.png)
 

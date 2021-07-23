@@ -1,4 +1,5 @@
 import { createCustomHeader } from '../custom-header-format/custom-header-format'
+import { AttributeType } from '../custom-header-format/variable-definition'
 import { TemplateRunContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
 
@@ -16,14 +17,32 @@ export const definitionTemplateTag: TemplateTag = {
       type: 'string',
     },
     {
-      displayName: 'Response JSON Path',
+      displayName: 'Attribute',
+      type: 'enum',
+      defaultValue: 'body',
+      options: [
+        {
+          displayName: 'Body Attribute',
+          description: 'value of response body',
+          value: 'body',
+        },
+        {
+          displayName: 'Header',
+          description: 'value of response header',
+          value: 'header',
+        },
+      ],
+    },
+    {
+      displayName: args => (args[1].value === 'body' ? 'Response JSON Path' : 'Header Name'),
       defaultValue: '',
       type: 'string',
     },
   ],
-  run: async (context: TemplateRunContext, variableNameArg: unknown, jsonPathArg: unknown) => {
+  run: async (context: TemplateRunContext, variableNameArg: unknown, attributeArg: unknown, pathArg: unknown) => {
     const variableName = variableNameArg as string
-    const jsonPath = jsonPathArg as string
-    return createCustomHeader({ variableName, jsonPath })
+    const attribute = attributeArg as AttributeType
+    const path = pathArg as string
+    return createCustomHeader({ variableName, attribute, path })
   },
 }

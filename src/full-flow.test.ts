@@ -21,7 +21,8 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      jsonPath: '$.ticket',
+      attribute: 'body',
+      path: '$.ticket',
     }
     context.request.setHeader(createCustomHeader(variableDefinition), 'doesNotMatter')
 

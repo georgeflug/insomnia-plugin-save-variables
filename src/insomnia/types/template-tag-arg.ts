@@ -1,8 +1,13 @@
 export type TemplateTagArg = {
-  displayName: string
+  displayName: string | ((args: TemplateTagArgWithValue[]) => string)
   description?: string
   defaultValue: string | number | boolean
   type: 'string' | 'number' | 'enum' | 'model' | 'boolean'
+  hide?: (args: Array<TemplateTagArg & { value: unknown }>) => boolean
+}
+
+export type TemplateTagArgWithValue = TemplateTagArg & {
+  value: unknown
 }
 
 export type TemplateTagStringArg = TemplateTagArg & {

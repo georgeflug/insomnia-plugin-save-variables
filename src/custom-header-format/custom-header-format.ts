@@ -1,4 +1,4 @@
-import { VariableDefinition } from './variable-definition'
+import { AttributeType, VariableDefinition } from './variable-definition'
 
 const headerPrefix = 'X-Save-Variable'
 
@@ -8,15 +8,17 @@ export function isCustomHeader(headerName: string): boolean {
 
 export function createCustomHeader(variableDefinition: VariableDefinition): string {
   const name = base64Encode(variableDefinition.variableName)
-  const path = base64Encode(variableDefinition.jsonPath)
-  return `${headerPrefix}-${name}-${path}`
+  const attribute = base64Encode(variableDefinition.attribute)
+  const path = base64Encode(variableDefinition.path)
+  return `${headerPrefix}-${name}-${attribute}-${path}`
 }
 
 export function parseCustomHeader(headerName: string): VariableDefinition {
   const parts = headerName.split('-')
   return {
     variableName: base64Decode(parts[3]),
-    jsonPath: base64Decode(parts[4]),
+    attribute: base64Decode(parts[4]) as AttributeType,
+    path: base64Decode(parts[5]),
   }
 }
 

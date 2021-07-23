@@ -1,4 +1,7 @@
 export type VariableDefinition = {
   variableName: string
-  jsonPath: string
+  attribute: AttributeType
+  path: string
 }
+
+export type AttributeType = 'body' | 'header'

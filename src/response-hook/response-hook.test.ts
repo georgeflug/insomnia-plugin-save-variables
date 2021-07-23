@@ -21,7 +21,8 @@ describe('Variable Saving Response Hook', () => {
   it('should read the response body value into a variable using json path', async () => {
     const VariableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      jsonPath: '$.ticketId',
+      attribute: 'body',
+      path: '$.ticketId',
     }
     const body = {
       someValue: 'test',
@@ -47,7 +48,8 @@ describe('Variable Saving Response Hook', () => {
   it('should remove variable definitions after using them so that they do not get reused by a different request', async () => {
     const VariableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      jsonPath: '$',
+      attribute: 'body',
+      path: '$',
     }
     const body = {
       someValue: 'test',
@@ -64,7 +66,8 @@ describe('Variable Saving Response Hook', () => {
   it('should not save variable if key cannot be found at path specified by json path', async () => {
     const VariableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      jsonPath: '$.doesNotExist',
+      attribute: 'body',
+      path: '$.doesNotExist',
     }
     const body = {
       ticketId: '123',
@@ -80,7 +83,8 @@ describe('Variable Saving Response Hook', () => {
   it('should save variable if value at key is expicitly null', async () => {
     const VariableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      jsonPath: '$.ticketId',
+      attribute: 'body',
+      path: '$.ticketId',
     }
     const body = {
       ticketId: null,
@@ -96,7 +100,8 @@ describe('Variable Saving Response Hook', () => {
   it('should not save variable if response body cannot be parsed as json', async () => {
     const VariableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      jsonPath: '$.ticketId',
+      attribute: 'body',
+      path: '$.ticketId',
     }
     const body = 'Hello. I am not JSON'
     await store.setItem('variableDefinitions', JSON.stringify([VariableDefinition]))

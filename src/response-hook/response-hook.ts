@@ -23,11 +23,31 @@ async function extractVariablesFromResponse(
   context: ResponseHookContext,
 ) {
   const promises = definitions.map(async def => {
-    const value = jsonpath.value(response, def.jsonPath)
+    const value = getValueFromResponse(response, def, context)
     if (value !== undefined) {
       const result = value === null ? null : value.toString()
       await context.store.setItem(`variable-${def.variableName}`, result)
     }
   })
   await Promise.all(promises)
+}
+
+function getValueFromResponse(
+  response: unknown,
+  definition: VariableDefinition,
+  context: ResponseHookContext,
+): string | undefined | null {
+  if (definition.attribute === 'body') {
+    return jsonpath.value(response, definition.path)
+  } else {
+    if (!context.response.hasHeader(definition.path)) {
+      return undefined
+    }
+    const header = context.response.getHeader(definition.path)
+    if (Array.isArray(header)) {
+      return header[0]
+    } else {
+      return header
+    }
+  }
 }

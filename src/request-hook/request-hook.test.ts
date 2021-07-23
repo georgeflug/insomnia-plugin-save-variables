@@ -24,7 +24,8 @@ describe('Variable Declaration Header Request Hook', () => {
   it('should remove the custom header from the request when it is present', async () => {
     const variableDefinition = {
       variableName: 'myVar',
-      jsonPath: '$.id',
+      attribute: 'body',
+      path: '$.id',
     } as VariableDefinition
     const headerName = createCustomHeader(variableDefinition)
     headers.setHeader(headerName, 'doesNotMatter')
@@ -45,7 +46,8 @@ describe('Variable Declaration Header Request Hook', () => {
   it('should save the custom header value for the response hook to read later', async () => {
     const variableDefinition = {
       variableName: 'myVar',
-      jsonPath: '$.id',
+      attribute: 'body',
+      path: '$.id',
     } as VariableDefinition
     const headerName = createCustomHeader(variableDefinition)
     headers.setHeader(headerName, 'doesNotMatter')
