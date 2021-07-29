@@ -29,12 +29,12 @@ describe('Store Mock', () => {
     ])
   })
 
-  it('getItem() should return undefined if an item does not exist', async () => {
+  it('getItem() should return null if an item does not exist', async () => {
     const store = createMockStore()
 
     const result = await store.getItem('key1')
 
-    expect(result).toEqual(undefined)
+    expect(result).toEqual(null)
   })
 
   it('hasItem() should return whether an item exists', async () => {
@@ -58,7 +58,7 @@ describe('Store Mock', () => {
     const allItems = await store.all()
 
     expect(hasItem).toEqual(false)
-    expect(item).toEqual(undefined)
+    expect(item).toEqual(null)
     expect(allItems).toEqual([])
   })
 
@@ -75,9 +75,9 @@ describe('Store Mock', () => {
     const allItems = await store.all()
 
     expect(hasItem1).toEqual(false)
-    expect(item1).toEqual(undefined)
+    expect(item1).toEqual(null)
     expect(hasItem2).toEqual(false)
-    expect(item2).toEqual(undefined)
+    expect(item2).toEqual(null)
     expect(allItems).toEqual([])
   })
 })

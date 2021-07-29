@@ -60,7 +60,7 @@ describe('Variable Saving Response Hook', () => {
 
     await variableSavingResponseHook(context)
 
-    expect(await store.getItem('variableDefinitions')).toEqual(undefined)
+    expect(await store.hasItem('variableDefinitions')).toEqual(false)
   })
 
   it('should not save variable if key cannot be found at path specified by json path', async () => {

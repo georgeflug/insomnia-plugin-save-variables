@@ -18,7 +18,7 @@ export const savedVariableTemplateTag: TemplateTag = {
   run: async (context: TemplateRunContext, variableNameArg: unknown) => {
     const variableName = variableNameArg as string
     const result = await context.store.getItem(`variable-${variableName}`)
-    if (result === undefined) {
+    if (result === null) {
       return await getHelpfulErrorMessage(context, variableName)
     }
     return result

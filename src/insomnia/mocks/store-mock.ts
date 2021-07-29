@@ -8,7 +8,7 @@ export function createMockStore(): StoreContext {
     setItem: async (key: string, value: string) => {
       items.set(key, value)
     },
-    getItem: async (key: string) => items.get(key),
+    getItem: async (key: string) => items.get(key) ?? null,
     removeItem: async (key: string) => {
       items.delete(key)
     },
