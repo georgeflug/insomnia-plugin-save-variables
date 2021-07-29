@@ -48,6 +48,15 @@ describe('Store Mock', () => {
     expect(hasItem2).toEqual(false)
   })
 
+  it('hasItem() should return true when an item was explicitly set to null', async () => {
+    const store = createMockStore()
+    await store.setItem('key1', null)
+
+    const hasItem1 = await store.hasItem('key1')
+
+    expect(hasItem1).toEqual(true)
+  })
+
   it('removeItem() should successfully remove an item', async () => {
     const store = createMockStore()
     await store.setItem('key1', 'value1')

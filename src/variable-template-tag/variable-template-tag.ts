@@ -17,11 +17,11 @@ export const savedVariableTemplateTag: TemplateTag = {
   ],
   run: async (context: TemplateRunContext, variableNameArg: unknown) => {
     const variableName = variableNameArg as string
-    const result = await context.store.getItem(`variable-${variableName}`)
-    if (result === null) {
-      return await getHelpfulErrorMessage(context, variableName)
+    const storeItemName = `variable-${variableName}`
+    if (await context.store.hasItem(storeItemName)) {
+      return await context.store.getItem(storeItemName)
     }
-    return result
+    return await getHelpfulErrorMessage(context, variableName)
   },
 }
 

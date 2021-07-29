@@ -8,12 +8,24 @@ describe('Saved Variable Template Tag', () => {
     store,
   } as Partial<TemplateRunContext>) as TemplateRunContext
 
+  beforeEach(() => {
+    store.clear()
+  })
+
   it('should return the requested variable', async () => {
     await store.setItem('variable-statusCode', '404')
 
     const result = await savedVariableTemplateTag.run(context, 'statusCode')
 
     expect(result).toEqual('404')
+  })
+
+  it('should return the requested variable if the value is null', async () => {
+    await store.setItem('variable-myVariable', null)
+
+    const result = await savedVariableTemplateTag.run(context, 'myVariable')
+
+    expect(result).toEqual(null)
   })
 
   it('should return a list of one variable if the requested variable does not exist', async () => {
