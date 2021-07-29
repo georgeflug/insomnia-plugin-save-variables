@@ -17,6 +17,19 @@ export const savedVariableTemplateTag: TemplateTag = {
   ],
   run: async (context: TemplateRunContext, variableNameArg: unknown) => {
     const variableName = variableNameArg as string
-    return await context.store.getItem(`variable-${variableName}`)
+    const result = await context.store.getItem(`variable-${variableName}`)
+    if (result === undefined) {
+      return await getHelpfulErrorMessage(context, variableName)
+    }
+    return result
   },
+}
+
+async function getHelpfulErrorMessage(context: TemplateRunContext, variableName: string): Promise<string> {
+  const allItems = await context.store.all()
+  const variables = allItems
+    .filter(item => item.key.startsWith('variable-'))
+    .map(item => `"${item.key.substring(9)}"`)
+    .join(',\n')
+  return `No variable with name "${variableName}". Choices are [\n${variables}\n]`
 }

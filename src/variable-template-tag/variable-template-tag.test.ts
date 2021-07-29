@@ -15,4 +15,21 @@ describe('Saved Variable Template Tag', () => {
 
     expect(result).toEqual('404')
   })
+
+  it('should return a list of one variable if the requested variable does not exist', async () => {
+    await store.setItem('variable-statusCode', '404')
+
+    const result = await savedVariableTemplateTag.run(context, 'doesNotExist')
+
+    expect(result).toEqual('No variable with name "doesNotExist". Choices are [\n"statusCode"\n]')
+  })
+
+  it('should return a list of multiple variables if the requested variable does not exist', async () => {
+    await store.setItem('variable-statusCode', '404')
+    await store.setItem('variable-statusMessage', 'Not Found')
+
+    const result = await savedVariableTemplateTag.run(context, 'doesNotExist')
+
+    expect(result).toEqual('No variable with name "doesNotExist". Choices are [\n"statusCode",\n"statusMessage"\n]')
+  })
 })
