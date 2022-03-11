@@ -26,7 +26,7 @@ export const savedVariableTemplateTag: TemplateTag = {
       run: async (context: TemplateActionContext) => {
         const customValueKey = await context.store.getItem("customValueKey")
         const customValue = await context.store.getItem("customValue")
-        if (customValueKey !== null) {
+        if (customValueKey !== null && customValue !== null) {
             context.store.setItem(customValueKey, customValue)
         }
       },
@@ -34,11 +34,14 @@ export const savedVariableTemplateTag: TemplateTag = {
   ],
   run: async (context: TemplateRunContext, variableNameArg: unknown, customValueArg: unknown) => {
     const variableName = variableNameArg as string
-    const setCustom = customValueArg as string
+    const customValue = customValueArg as string
     const storeItemName = `variable-${variableName}`
-    if (setCustom !== undefined) {
+    if (customValue !== undefined) {
         await context.store.setItem("customValueKey", storeItemName)
-        await context.store.setItem("customValue", setCustom)
+        await context.store.setItem("customValue", customValue)
+    } else {
+        await context.store.removeItem("customValueKey")
+        await context.store.removeItem("customValue")
     }
     if (await context.store.hasItem(storeItemName)) {
       return await context.store.getItem(storeItemName)
