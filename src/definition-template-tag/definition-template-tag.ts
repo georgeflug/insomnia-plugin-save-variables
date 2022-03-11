@@ -38,11 +38,20 @@ export const definitionTemplateTag: TemplateTag = {
       defaultValue: '',
       type: 'string',
     },
+    {
+      displayName: `Set Custom Value (End with '$')`,
+      defaultValue: '',
+      type: 'string',
+    },
   ],
-  run: async (context: TemplateRunContext, variableNameArg: unknown, attributeArg: unknown, pathArg: unknown) => {
+  run: async (context: TemplateRunContext, variableNameArg: unknown, attributeArg: unknown, pathArg: unknown, setCustomArg: unknown) => {
     const variableName = variableNameArg as string
     const attribute = attributeArg as AttributeType
     const path = pathArg as string
+    const setCustom = setCustomArg as string
+    if (setCustom.endsWith('$')) {
+        await context.store.setItem(`variable-${variableName}`, setCustom.slice(0, -1))
+    }
     return createCustomHeader({ variableName, attribute, path })
   },
 }
