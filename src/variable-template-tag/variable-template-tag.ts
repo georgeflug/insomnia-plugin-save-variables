@@ -1,4 +1,4 @@
-import { TemplateRunContext } from '../insomnia/types/template-context'
+import { TemplateRunContext, TemplateActionContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
 
 export const savedVariableTemplateTag: TemplateTag = {
@@ -14,10 +14,32 @@ export const savedVariableTemplateTag: TemplateTag = {
       defaultValue: '',
       type: 'string',
     },
+    {
+      displayName: `Custom Value`,
+      defaultValue: '',
+      type: 'string',
+    },
   ],
-  run: async (context: TemplateRunContext, variableNameArg: unknown) => {
+  actions: [
+    {
+      name : 'Update Custom Value',
+      run: async (context: TemplateActionContext) => {
+        const customValueKey = await context.store.getItem("customValueKey")
+        const customValue = await context.store.getItem("customValue")
+        if (customValueKey !== null) {
+            context.store.setItem(customValueKey, customValue)
+        }
+      },
+    }
+  ],
+  run: async (context: TemplateRunContext, variableNameArg: unknown, customValueArg: unknown) => {
     const variableName = variableNameArg as string
+    const setCustom = customValueArg as string
     const storeItemName = `variable-${variableName}`
+    if (setCustom !== undefined) {
+        await context.store.setItem("customValueKey", storeItemName)
+        await context.store.setItem("customValue", setCustom)
+    }
     if (await context.store.hasItem(storeItemName)) {
       return await context.store.getItem(storeItemName)
     }
