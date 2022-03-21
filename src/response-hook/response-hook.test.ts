@@ -19,7 +19,7 @@ describe('Variable Saving Response Hook', () => {
   })
 
   it('should read the response body value into a variable using json path', async () => {
-    const VariableDefinition: VariableDefinition = {
+    const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       attribute: 'body',
       path: '$.ticketId',
@@ -28,7 +28,7 @@ describe('Variable Saving Response Hook', () => {
       someValue: 'test',
       ticketId: '123',
     }
-    await store.setItem('variableDefinitions', JSON.stringify([VariableDefinition]))
+    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -46,7 +46,7 @@ describe('Variable Saving Response Hook', () => {
   })
 
   it('should remove variable definitions after using them so that they do not get reused by a different request', async () => {
-    const VariableDefinition: VariableDefinition = {
+    const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       attribute: 'body',
       path: '$',
@@ -55,7 +55,7 @@ describe('Variable Saving Response Hook', () => {
       someValue: 'test',
       ticketId: '123',
     }
-    await store.setItem('variableDefinitions', JSON.stringify([VariableDefinition]))
+    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -64,7 +64,7 @@ describe('Variable Saving Response Hook', () => {
   })
 
   it('should not save variable if key cannot be found at path specified by json path', async () => {
-    const VariableDefinition: VariableDefinition = {
+    const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       attribute: 'body',
       path: '$.doesNotExist',
@@ -72,7 +72,7 @@ describe('Variable Saving Response Hook', () => {
     const body = {
       ticketId: '123',
     }
-    await store.setItem('variableDefinitions', JSON.stringify([VariableDefinition]))
+    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -81,7 +81,7 @@ describe('Variable Saving Response Hook', () => {
   })
 
   it('should save variable if value at key is expicitly null', async () => {
-    const VariableDefinition: VariableDefinition = {
+    const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       attribute: 'body',
       path: '$.ticketId',
@@ -89,7 +89,7 @@ describe('Variable Saving Response Hook', () => {
     const body = {
       ticketId: null,
     }
-    await store.setItem('variableDefinitions', JSON.stringify([VariableDefinition]))
+    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -98,14 +98,14 @@ describe('Variable Saving Response Hook', () => {
   })
 
   it('should not save variable if response body cannot be parsed as json', async () => {
-    const VariableDefinition: VariableDefinition = {
+    const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       attribute: 'body',
       path: '$.ticketId',
     }
     const body = 'Hello. I am not JSON'
-    await store.setItem('variableDefinitions', JSON.stringify([VariableDefinition]))
-    getBodyMock.mockReturnValue(JSON.stringify(body))
+    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
+    getBodyMock.mockReturnValue(body)
 
     await variableSavingResponseHook(context)
 

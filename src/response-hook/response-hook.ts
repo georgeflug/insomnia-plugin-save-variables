@@ -1,4 +1,4 @@
-import jsonpath from 'jsonpath'
+import { JSONPath } from 'jsonpath-plus'
 import { VariableDefinition } from '../custom-header-format/variable-definition'
 import { ResponseHook } from '../insomnia/types/response-hook'
 import { ResponseHookContext } from '../insomnia/types/response-hook-context'
@@ -19,7 +19,7 @@ export const variableSavingResponseHook: ResponseHook = async (context: Response
 
 async function extractVariablesFromResponse(
   definitions: VariableDefinition[],
-  response: unknown,
+  response: string,
   context: ResponseHookContext,
 ) {
   const promises = definitions.map(async def => {
@@ -33,12 +33,16 @@ async function extractVariablesFromResponse(
 }
 
 function getValueFromResponse(
-  response: unknown,
+  response: string,
   definition: VariableDefinition,
   context: ResponseHookContext,
 ): string | undefined | null {
   if (definition.attribute === 'body') {
-    return jsonpath.value(response, definition.path)
+    return JSONPath<string>({
+      path: definition.path,
+      json: response,
+      wrap: false,
+    })
   } else {
     if (!context.response.hasHeader(definition.path)) {
       return undefined
