@@ -20,14 +20,14 @@ export const savedVariableTemplateTag: TemplateTag = {
   ],
   actions: [
     {
-      name: 'Update Custom Value',
-      run: async (context: TemplateActionContext, ...args: unknown[]): Promise<void> => {
+      name: 'Manually Update Value',
+      run: async (context: TemplateActionContext): Promise<void> => {
         if (lastStoreItemName !== null) {
           try {
             const currentValue = await context.store.getItem(lastStoreItemName)
             const newValue = await prompt({
-              title: 'Update Custom Value',
-              label: 'Custom Value:',
+              title: 'Manually Update Value',
+              label: 'New Value:',
               value: currentValue,
               inputAttrs: {
                 type: 'text',
