@@ -9,6 +9,8 @@ import { variableDeclarationHeaderRequestHook } from './request-hook/request-hoo
 import { variableSavingResponseHook } from './response-hook/response-hook'
 import { savedVariableTemplateTag } from './variable-template-tag/variable-template-tag'
 
+jest.mock('electron-prompt', () => ({}))
+
 describe('Test through entire system', () => {
   it('should save variable using request header and response hook', async () => {
     const ticketNumber = 'ID-123'

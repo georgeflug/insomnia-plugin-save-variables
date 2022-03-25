@@ -2,6 +2,8 @@ import { createMockStore } from '../insomnia/mocks/store-mock'
 import { TemplateRunContext } from '../insomnia/types/template-context'
 import { savedVariableTemplateTag } from './variable-template-tag'
 
+jest.mock('electron-prompt', () => ({}))
+
 describe('Saved Variable Template Tag', () => {
   const store = createMockStore()
   const context = ({
