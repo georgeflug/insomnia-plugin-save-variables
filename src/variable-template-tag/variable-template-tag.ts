@@ -23,18 +23,14 @@ export const savedVariableTemplateTag: TemplateTag = {
       name: 'Manually Update Value',
       run: async (context: TemplateActionContext): Promise<void> => {
         if (lastStoreItemName !== null) {
-          try {
-            const currentValue = await context.store.getItem(lastStoreItemName)
-            const newValue = await prompt({
-              title: 'Manually Update Value',
-              label: 'New Value:',
-              value: currentValue,
-            })
-            if (newValue !== null) {
-              context.store.setItem(lastStoreItemName, newValue)
-            }
-          } catch (e) {
-            console.error(e)
+          const currentValue = await context.store.getItem(lastStoreItemName)
+          const newValue = await prompt({
+            title: 'Manually Update Value',
+            label: 'New Value:',
+            value: currentValue,
+          })
+          if (newValue !== null) {
+            context.store.setItem(lastStoreItemName, newValue)
           }
         }
       },
