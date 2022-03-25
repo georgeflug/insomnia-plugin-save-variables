@@ -22,22 +22,23 @@ export const savedVariableTemplateTag: TemplateTag = {
       run: async (context: TemplateActionContext): Promise<void> => {
         const customValueKey = await context.store.getItem('customValueKey')
         if (customValueKey !== null) {
-          const currentValue = await context.store.getItem(customValueKey)
-          prompt({
-            title: 'Update Custom Value',
-            label: 'Custom Value:',
-            value: currentValue,
-            inputAttrs: {
-              type: 'text',
-            },
-            type: 'input',
-          })
-            .then(r => {
-              if (r !== null) {
-                context.store.setItem(customValueKey, r)
-              }
+          try {
+            const currentValue = await context.store.getItem(customValueKey)
+            const newValue = await prompt({
+              title: 'Update Custom Value',
+              label: 'Custom Value:',
+              value: currentValue,
+              inputAttrs: {
+                type: 'text',
+              },
+              type: 'input',
             })
-            .catch(console.error)
+            if (newValue !== null) {
+              context.store.setItem(customValueKey, newValue)
+            }
+          } catch (e) {
+            console.error(e)
+          }
         }
       },
     },
