@@ -2,6 +2,8 @@ import { TemplateRunContext, TemplateActionContext } from '../insomnia/types/tem
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
 import prompt from 'electron-prompt'
 
+let lastStoreItemName = ''
+
 export const savedVariableTemplateTag: TemplateTag = {
   name: 'variable',
   displayName: 'Variable',
@@ -19,11 +21,10 @@ export const savedVariableTemplateTag: TemplateTag = {
   actions: [
     {
       name: 'Update Custom Value',
-      run: async (context: TemplateActionContext): Promise<void> => {
-        const customValueKey = await context.store.getItem('customValueKey')
-        if (customValueKey !== null) {
+      run: async (context: TemplateActionContext, ...args: unknown[]): Promise<void> => {
+        if (lastStoreItemName !== null) {
           try {
-            const currentValue = await context.store.getItem(customValueKey)
+            const currentValue = await context.store.getItem(lastStoreItemName)
             const newValue = await prompt({
               title: 'Update Custom Value',
               label: 'Custom Value:',
@@ -34,7 +35,7 @@ export const savedVariableTemplateTag: TemplateTag = {
               type: 'input',
             })
             if (newValue !== null) {
-              context.store.setItem(customValueKey, newValue)
+              context.store.setItem(lastStoreItemName, newValue)
             }
           } catch (e) {
             console.error(e)
@@ -46,7 +47,7 @@ export const savedVariableTemplateTag: TemplateTag = {
   run: async (context: TemplateRunContext, variableNameArg: unknown) => {
     const variableName = variableNameArg as string
     const storeItemName = `variable-${variableName}`
-    await context.store.setItem('customValueKey', storeItemName)
+    lastStoreItemName = storeItemName
     if (await context.store.hasItem(storeItemName)) {
       return await context.store.getItem(storeItemName)
     }
