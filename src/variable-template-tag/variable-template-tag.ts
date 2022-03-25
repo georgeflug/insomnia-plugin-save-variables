@@ -29,10 +29,6 @@ export const savedVariableTemplateTag: TemplateTag = {
               title: 'Manually Update Value',
               label: 'New Value:',
               value: currentValue,
-              inputAttrs: {
-                type: 'text',
-              },
-              type: 'input',
             })
             if (newValue !== null) {
               context.store.setItem(lastStoreItemName, newValue)
