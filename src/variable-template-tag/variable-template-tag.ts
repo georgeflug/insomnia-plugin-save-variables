@@ -1,5 +1,6 @@
-import { TemplateRunContext } from '../insomnia/types/template-context'
+import { TemplateRunContext, TemplateActionContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
+import prompt from 'electron-prompt'
 
 export const savedVariableTemplateTag: TemplateTag = {
   name: 'variable',
@@ -15,9 +16,36 @@ export const savedVariableTemplateTag: TemplateTag = {
       type: 'string',
     },
   ],
+  actions: [
+    {
+      name: 'Update Custom Value',
+      run: async (context: TemplateActionContext): Promise<void> => {
+        const customValueKey = await context.store.getItem('customValueKey')
+        if (customValueKey !== null) {
+          const currentValue = await context.store.getItem(customValueKey)
+          prompt({
+            title: 'Update Custom Value',
+            label: 'Custom Value:',
+            value: currentValue,
+            inputAttrs: {
+              type: 'text',
+            },
+            type: 'input',
+          })
+            .then(r => {
+              if (r !== null) {
+                context.store.setItem(customValueKey, r)
+              }
+            })
+            .catch(console.error)
+        }
+      },
+    },
+  ],
   run: async (context: TemplateRunContext, variableNameArg: unknown) => {
     const variableName = variableNameArg as string
     const storeItemName = `variable-${variableName}`
+    await context.store.setItem('customValueKey', storeItemName)
     if (await context.store.hasItem(storeItemName)) {
       return await context.store.getItem(storeItemName)
     }
