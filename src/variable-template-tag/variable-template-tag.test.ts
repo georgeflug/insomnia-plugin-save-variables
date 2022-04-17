@@ -69,4 +69,12 @@ describe('Saved Variable Template Tag', () => {
 
     expect(result).toEqual('No variable with name "doesNotExist". Choices are [\n"statusCode"\n]')
   })
+
+  it('should return message saying no variables exist when no variables exist', async () => {
+    // no arrange
+
+    const result = await savedVariableTemplateTag.run(context, 'doesNotExist')
+
+    expect(result).toEqual('No variable with name "doesNotExist". No variables have been set yet.')
+  })
 })

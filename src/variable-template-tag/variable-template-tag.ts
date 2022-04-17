@@ -56,6 +56,9 @@ async function getHelpfulErrorMessage(context: TemplateRunContext, variableName:
     .map(item => parseVariableKey(item.key))
     .filter(keyParts => keyParts.workspaceId === context.meta.workspaceId)
     .map(keyParts => `"${keyParts.variableName}"`)
-    .join(',\n')
-  return `No variable with name "${variableName}". Choices are [\n${variables}\n]`
+  if (variables.length === 0) {
+    return `No variable with name "${variableName}". No variables have been set yet.`
+  } else {
+    return `No variable with name "${variableName}". Choices are [\n${variables.join(',\n')}\n]`
+  }
 }

@@ -74,6 +74,6 @@ describe('Test through entire system', () => {
       'ticketNumber',
     )
 
-    expect(result).toEqual('No variable with name "ticketNumber". Choices are [\n\n]')
+    expect(result).toEqual('No variable with name "ticketNumber". No variables have been set yet.')
   })
 })
