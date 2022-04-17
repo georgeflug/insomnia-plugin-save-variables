@@ -1,5 +1,6 @@
 import { TemplateRunContext, TemplateActionContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
+import { getVariableKey, parseVariableKey } from '../variable-key'
 import prompt from 'electron-prompt'
 
 let lastStoreItemName = ''
@@ -38,7 +39,7 @@ export const savedVariableTemplateTag: TemplateTag = {
   ],
   run: async (context: TemplateRunContext, variableNameArg: unknown) => {
     const variableName = variableNameArg as string
-    const storeItemName = `variable-${variableName}`
+    const storeItemName = getVariableKey(context.meta.workspaceId, variableName)
     lastStoreItemName = storeItemName
     if (await context.store.hasItem(storeItemName)) {
       return await context.store.getItem(storeItemName)
@@ -51,7 +52,10 @@ async function getHelpfulErrorMessage(context: TemplateRunContext, variableName:
   const allItems = await context.store.all()
   const variables = allItems
     .filter(item => item.key.startsWith('variable-'))
-    .map(item => `"${item.key.substring(9)}"`)
+    .filter(item => item.key.split('-').length === 3)
+    .map(item => parseVariableKey(item.key))
+    .filter(keyParts => keyParts.workspaceId === context.meta.workspaceId)
+    .map(keyParts => `"${keyParts.variableName}"`)
     .join(',\n')
   return `No variable with name "${variableName}". Choices are [\n${variables}\n]`
 }

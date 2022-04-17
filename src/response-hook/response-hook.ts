@@ -2,6 +2,7 @@ import { JSONPath } from 'jsonpath-plus'
 import { VariableDefinition } from '../custom-header-format/variable-definition'
 import { ResponseHook } from '../insomnia/types/response-hook'
 import { ResponseHookContext } from '../insomnia/types/response-hook-context'
+import { getVariableKey } from '../variable-key'
 
 export const variableSavingResponseHook: ResponseHook = async (context: ResponseHookContext) => {
   const serializedDefinitions = await context.store.getItem('variableDefinitions')
@@ -26,7 +27,8 @@ async function extractVariablesFromResponse(
     const value = getValueFromResponse(response, def, context)
     if (value !== undefined) {
       const result = value === null ? null : value.toString()
-      await context.store.setItem(`variable-${def.variableName}`, result)
+      const key = getVariableKey(def.workspaceId, def.variableName)
+      await context.store.setItem(key, result)
     }
   })
   await Promise.all(promises)

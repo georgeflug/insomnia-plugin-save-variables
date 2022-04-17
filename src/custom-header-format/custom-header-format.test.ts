@@ -7,6 +7,7 @@ describe('Custom Header Format', () => {
       variableName: 'test',
       attribute: 'body',
       path: '$.test',
+      workspaceId: 'wrk_4efc4e7c4dea494ebb4d0280138c8893',
     } as VariableDefinition
 
     const header = createCustomHeader(variableDefinition)
@@ -22,6 +23,7 @@ describe('Custom Header Format', () => {
       variableName: 'my-test-variable',
       attribute: 'header',
       path: '$.test-key',
+      workspaceId: 'wrk_4efc4e7c4dea4-94ebb4d02-80138c8893',
     } as VariableDefinition
 
     const header = createCustomHeader(variableDefinition)

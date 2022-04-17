@@ -14,17 +14,22 @@ jest.mock('electron-prompt', () => ({}))
 describe('Test through entire system', () => {
   it('should save variable using request header and response hook', async () => {
     const ticketNumber = 'ID-123'
+    const workspaceId = 'wrk_23232323'
     const context = {
       request: createMockHeaders(),
       response: {
         getBody: jest.fn().mockReturnValue(`{"ticket": "${ticketNumber}","other":"doesNotMatter"}`),
       },
       store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       attribute: 'body',
       path: '$.ticket',
+      workspaceId,
     }
     context.request.setHeader(createCustomHeader(variableDefinition), 'doesNotMatter')
 
@@ -33,5 +38,42 @@ describe('Test through entire system', () => {
     const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'ticketNumber')
 
     expect(result).toEqual(ticketNumber)
+  })
+
+  it('should not be able to access variable that was saved in a different workspace', async () => {
+    const ticketNumber = 'ID-123'
+    const workspaceId = 'wrk_23232323'
+    const context = {
+      request: createMockHeaders(),
+      response: {
+        getBody: jest.fn().mockReturnValue(`{"ticket": "${ticketNumber}","other":"doesNotMatter"}`),
+      },
+      store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
+    }
+    const variableDefinition: VariableDefinition = {
+      variableName: 'ticketNumber',
+      attribute: 'body',
+      path: '$.ticket',
+      workspaceId,
+    }
+    context.request.setHeader(createCustomHeader(variableDefinition), 'doesNotMatter')
+    const otherWorkspaceContext = {
+      ...context,
+      meta: {
+        workspaceId: 'wrk_8989898998',
+      },
+    }
+
+    await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
+    await variableSavingResponseHook((context as unknown) as ResponseHookContext)
+    const result = await savedVariableTemplateTag.run(
+      (otherWorkspaceContext as unknown) as TemplateRunContext,
+      'ticketNumber',
+    )
+
+    expect(result).toEqual('No variable with name "ticketNumber". Choices are [\n\n]')
   })
 })

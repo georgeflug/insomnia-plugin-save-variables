@@ -8,4 +8,7 @@ export type TemplateActionContext = {
 export type TemplateRunContext = {
   app: AppContext
   store: StoreContext
+  meta: {
+    workspaceId: string
+  }
 }

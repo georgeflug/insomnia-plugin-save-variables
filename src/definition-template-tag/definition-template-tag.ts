@@ -43,6 +43,7 @@ export const definitionTemplateTag: TemplateTag = {
     const variableName = variableNameArg as string
     const attribute = attributeArg as AttributeType
     const path = pathArg as string
-    return createCustomHeader({ variableName, attribute, path })
+    const workspaceId = context.meta.workspaceId
+    return createCustomHeader({ variableName, attribute, path, workspaceId })
   },
 }

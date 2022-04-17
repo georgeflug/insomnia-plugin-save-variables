@@ -22,11 +22,12 @@ describe('Variable Declaration Header Request Hook', () => {
   })
 
   it('should remove the custom header from the request when it is present', async () => {
-    const variableDefinition = {
+    const variableDefinition: VariableDefinition = {
       variableName: 'myVar',
       attribute: 'body',
       path: '$.id',
-    } as VariableDefinition
+      workspaceId: 'wrk_213653457',
+    }
     const headerName = createCustomHeader(variableDefinition)
     headers.setHeader(headerName, 'doesNotMatter')
 
@@ -44,11 +45,12 @@ describe('Variable Declaration Header Request Hook', () => {
   })
 
   it('should save the custom header value for the response hook to read later', async () => {
-    const variableDefinition = {
+    const variableDefinition: VariableDefinition = {
+      workspaceId: 'wrk_123567456',
       variableName: 'myVar',
       attribute: 'body',
       path: '$.id',
-    } as VariableDefinition
+    }
     const headerName = createCustomHeader(variableDefinition)
     headers.setHeader(headerName, 'doesNotMatter')
 
