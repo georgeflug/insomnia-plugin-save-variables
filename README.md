@@ -50,6 +50,8 @@ The `Variable` tag exposes the most recent value saved to the variable.
 The variables are stored into the plugin's private storage. They are not saved as 
 environment variables and are not exported.
 
+Variables are scoped to the current workspace/collection.
+
 ## Development
 
 Create a `.env` file in this repo with the following contents:
