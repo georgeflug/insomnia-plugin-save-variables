@@ -1,0 +1,14 @@
+diff --git a/node_modules/sweetalert/typings/sweetalert.d.ts b/node_modules/sweetalert/typings/sweetalert.d.ts
+index f7220ea..b24d3ab 100644
+--- a/node_modules/sweetalert/typings/sweetalert.d.ts
++++ b/node_modules/sweetalert/typings/sweetalert.d.ts
+@@ -1,9 +1,4 @@
+ import swal, { SweetAlert } from "./core";
+ 
+-declare global {
+-  const swal: SweetAlert;
+-  const sweetAlert: SweetAlert;
+-}
+-
+ export default swal;
+ export as namespace swal;
