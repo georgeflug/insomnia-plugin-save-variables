@@ -11,7 +11,7 @@
     "test": "jest",
     "prepare": "husky install",
     "prepublishOnly": "rm -rf ./dist/ && npm run build",
-    "postinstall": "npx patch-package",
+    "postinstall": "exitzero npx patch-package",
     "postversion": "git push && git push --tags"
   },
   "insomnia": {
@@ -47,6 +47,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "exitzero": "^1.0.1",
     "jsonpath-plus": "^6.0.1",
     "patch-package": "^6.4.7",
     "sweetalert": "^2.1.2"
