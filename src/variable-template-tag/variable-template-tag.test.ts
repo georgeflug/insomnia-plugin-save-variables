@@ -3,7 +3,7 @@ import { TemplateRunContext } from '../insomnia/types/template-context'
 import { getVariableKey } from '../variable-key'
 import { savedVariableTemplateTag } from './variable-template-tag'
 
-jest.mock('electron-prompt', () => ({}))
+jest.mock('sweetalert', () => ({}))
 
 describe('Saved Variable Template Tag', () => {
   const store = createMockStore()

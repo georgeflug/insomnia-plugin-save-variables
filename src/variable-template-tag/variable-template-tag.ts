@@ -1,7 +1,7 @@
 import { TemplateRunContext, TemplateActionContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
 import { getVariableKey, parseVariableKey } from '../variable-key'
-import prompt from 'electron-prompt'
+import swal from 'sweetalert'
 
 let lastStoreItemName = ''
 
@@ -25,10 +25,18 @@ export const savedVariableTemplateTag: TemplateTag = {
       run: async (context: TemplateActionContext): Promise<void> => {
         if (lastStoreItemName !== null) {
           const currentValue = await context.store.getItem(lastStoreItemName)
-          const newValue = await prompt({
+          const newValue = await swal({
             title: 'Manually Update Value',
-            label: 'New Value:',
-            value: currentValue,
+            text: 'New Value:',
+            buttons: ['Cancel', 'Update Now'],
+            content: {
+              element: 'input',
+              attributes: {
+                placeholder: 'New value',
+                type: 'text',
+                value: currentValue,
+              },
+            },
           })
           if (newValue !== null) {
             context.store.setItem(lastStoreItemName, newValue)
