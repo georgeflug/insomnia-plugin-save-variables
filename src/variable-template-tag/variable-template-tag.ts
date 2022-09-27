@@ -44,6 +44,14 @@ export const savedVariableTemplateTag: TemplateTag = {
         }
       },
     },
+    {
+      name: 'Delete Variable',
+      run: async (context: TemplateActionContext): Promise<void> => {
+        if (lastStoreItemName !== null) {
+          await context.store.removeItem(lastStoreItemName)
+        }
+      },
+    },
   ],
   run: async (context: TemplateRunContext, variableNameArg: unknown) => {
     const variableName = variableNameArg as string
