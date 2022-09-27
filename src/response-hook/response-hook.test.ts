@@ -1,4 +1,4 @@
-import { VariableDefinition } from '../custom-header-format/variable-definition'
+import { VariableDefinition } from '../custom-header-format/variable-definition/variable-definition'
 import { createMockStore } from '../insomnia/mocks/store-mock'
 import { ResponseContext } from '../insomnia/types/response-context'
 import { ResponseHookContext } from '../insomnia/types/response-hook-context'

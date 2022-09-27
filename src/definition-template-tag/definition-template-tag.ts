@@ -1,5 +1,7 @@
-import { createCustomHeader } from '../custom-header-format/custom-header-format'
-import { AttributeType } from '../custom-header-format/variable-definition'
+import {
+  AttributeType,
+  createVariableDefinitionHeader,
+} from '../custom-header-format/variable-definition/variable-definition'
 import { TemplateRunContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
 
@@ -44,6 +46,6 @@ export const definitionTemplateTag: TemplateTag = {
     const attribute = attributeArg as AttributeType
     const path = pathArg as string
     const workspaceId = context.meta.workspaceId
-    return createCustomHeader({ variableName, attribute, path, workspaceId })
+    return createVariableDefinitionHeader({ variableName, attribute, path, workspaceId })
   },
 }

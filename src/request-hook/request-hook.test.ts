@@ -1,10 +1,12 @@
-import { createCustomHeader } from '../custom-header-format/custom-header-format'
-import { VariableDefinition } from '../custom-header-format/variable-definition'
 import { createMockHeaders } from '../insomnia/mocks/headers-mock'
 import { createMockStore } from '../insomnia/mocks/store-mock'
 import { RequestContextHeaders, RequestContext } from '../insomnia/types/request-context'
 import { RequestHookContext } from '../insomnia/types/request-hook-context'
 import { variableDeclarationHeaderRequestHook } from './request-hook'
+import {
+  createVariableDefinitionHeader,
+  VariableDefinition,
+} from '../custom-header-format/variable-definition/variable-definition'
 
 describe('Variable Declaration Header Request Hook', () => {
   const store = createMockStore()
@@ -28,7 +30,7 @@ describe('Variable Declaration Header Request Hook', () => {
       path: '$.id',
       workspaceId: 'wrk_213653457',
     }
-    const headerName = createCustomHeader(variableDefinition)
+    const headerName = createVariableDefinitionHeader(variableDefinition)
     headers.setHeader(headerName, 'doesNotMatter')
 
     await variableDeclarationHeaderRequestHook(context)
@@ -51,7 +53,7 @@ describe('Variable Declaration Header Request Hook', () => {
       attribute: 'body',
       path: '$.id',
     }
-    const headerName = createCustomHeader(variableDefinition)
+    const headerName = createVariableDefinitionHeader(variableDefinition)
     headers.setHeader(headerName, 'doesNotMatter')
 
     await variableDeclarationHeaderRequestHook(context)

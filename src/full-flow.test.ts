@@ -1,5 +1,7 @@
-import { createCustomHeader } from './custom-header-format/custom-header-format'
-import { VariableDefinition } from './custom-header-format/variable-definition'
+import {
+  createVariableDefinitionHeader,
+  VariableDefinition,
+} from './custom-header-format/variable-definition/variable-definition'
 import { createMockHeaders } from './insomnia/mocks/headers-mock'
 import { createMockStore } from './insomnia/mocks/store-mock'
 import { RequestHookContext } from './insomnia/types/request-hook-context'
@@ -31,7 +33,7 @@ describe('Test through entire system', () => {
       path: '$.ticket',
       workspaceId,
     }
-    context.request.setHeader(createCustomHeader(variableDefinition), 'doesNotMatter')
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
 
     await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
     await variableSavingResponseHook((context as unknown) as ResponseHookContext)
@@ -59,7 +61,7 @@ describe('Test through entire system', () => {
       path: '$.ticket',
       workspaceId,
     }
-    context.request.setHeader(createCustomHeader(variableDefinition), 'doesNotMatter')
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
     const otherWorkspaceContext = {
       ...context,
       meta: {
