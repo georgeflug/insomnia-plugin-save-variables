@@ -1,8 +1,8 @@
 import { JSONPath } from 'jsonpath-plus'
-import { VariableDefinition } from '../custom-header-format/variable-definition/variable-definition'
-import { ResponseHook } from '../insomnia/types/response-hook'
-import { ResponseHookContext } from '../insomnia/types/response-hook-context'
-import { getVariableKey } from '../variable-key'
+import { VariableDefinition } from '../../custom-header-format/variable-definition/variable-definition'
+import { ResponseHook } from '../../insomnia/types/response-hook'
+import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
+import { getVariableKey } from '../../variable-key'
 
 export const variableSavingResponseHook: ResponseHook = async (context: ResponseHookContext) => {
   const serializedDefinitions = await context.store.getItem('variableDefinitions')

@@ -3,7 +3,7 @@ import { definitionTemplateTag } from './definition-template-tag/definition-temp
 import { RequestHook } from './insomnia/types/request-hook'
 import { ResponseHook } from './insomnia/types/response-hook'
 import { TemplateTag } from './insomnia/types/template-tag'
-import { variableDeclarationHeaderRequestHook } from './request-hook/request-hook'
+import { variableDeclarationHeaderRequestHook } from './request-hook/variable-definition/request-hook'
 import { variableSavingResponseHook } from './response-hook/response-hook'
 import { savedVariableTemplateTag } from './variable-template-tag/variable-template-tag'
 

@@ -1,8 +1,8 @@
-import { VariableDefinition } from '../custom-header-format/variable-definition/variable-definition'
-import { createMockStore } from '../insomnia/mocks/store-mock'
-import { ResponseContext } from '../insomnia/types/response-context'
-import { ResponseHookContext } from '../insomnia/types/response-hook-context'
-import { getVariableKey } from '../variable-key'
+import { VariableDefinition } from '../../custom-header-format/variable-definition/variable-definition'
+import { createMockStore } from '../../insomnia/mocks/store-mock'
+import { ResponseContext } from '../../insomnia/types/response-context'
+import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
+import { getVariableKey } from '../../variable-key'
 import { variableSavingResponseHook } from './response-hook'
 
 describe('Variable Saving Response Hook', () => {

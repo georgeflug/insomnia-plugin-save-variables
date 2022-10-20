@@ -1,9 +1,9 @@
 import {
   isVariableDefinitionHeader,
   parseVariableDefinitionHeader,
-} from '../custom-header-format/variable-definition/variable-definition'
-import { RequestHook } from '../insomnia/types/request-hook'
-import { RequestHookContext } from '../insomnia/types/request-hook-context'
+} from '../../custom-header-format/variable-definition/variable-definition'
+import { RequestHook } from '../../insomnia/types/request-hook'
+import { RequestHookContext } from '../../insomnia/types/request-hook-context'
 
 export const variableDeclarationHeaderRequestHook: RequestHook = async (context: RequestHookContext) => {
   const headers = context.request.getHeaders()
