@@ -42,9 +42,18 @@ the json response or from a response header.
 ![Header Example](/images/header-example-2.png)
 
 ### Use a variable
-The `Variable` tag exposes the most recent value saved to the variable.
+The `Variable` tag exposes the most recent value saved to the variable. Additionally, The `edit` dialog for this tag allows you to edit the value manually or delete the variable.
 
 ![Variable Example](/images/variable-example.png)
+
+### Review All Variables
+The `All Variables` tag is useful for inspecting which variables you have saved.
+
+### Delete a variable
+Similar to defining a variable, the `Delete Variable` tag can be added to a request
+header. It will delete the variable whenever the request is sent. Optionally it will
+only delete the variable if the status code of the response matches a provided
+regular expression.
 
 ## More Information
 The variables are stored into the plugin's private storage. They are not saved as 
