@@ -3,6 +3,7 @@ import { createCustomHeader, parseCustomHeader } from '../base/custom-header-for
 export type DeletionDefinition = {
   variableName: string
   statusCodeMatcher: string
+  workspaceId: string
 }
 
 const headerPrefix = 'X-Delete-Variable'
@@ -12,7 +13,11 @@ export function isDeletionHeader(headerName: string): boolean {
 }
 
 export function createDeletionHeader(deletionDefinition: DeletionDefinition): string {
-  return createCustomHeader(headerPrefix, [deletionDefinition.variableName, deletionDefinition.statusCodeMatcher])
+  return createCustomHeader(headerPrefix, [
+    deletionDefinition.variableName,
+    deletionDefinition.statusCodeMatcher,
+    deletionDefinition.workspaceId,
+  ])
 }
 
 export function parseDeletionHeader(headerName: string): DeletionDefinition {
@@ -20,5 +25,6 @@ export function parseDeletionHeader(headerName: string): DeletionDefinition {
   return {
     variableName: parts[0],
     statusCodeMatcher: parts[1],
+    workspaceId: parts[2],
   }
 }

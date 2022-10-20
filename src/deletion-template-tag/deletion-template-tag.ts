@@ -7,7 +7,7 @@ export const deletionTemplateTag: TemplateTag = {
   displayName: 'Delete Variable',
   description: 'delete variable after response is received',
   liveDisplayName: (args: LiveDisplayArg[]) => {
-    return `Save Variable - ${args[0].value}`
+    return `Delete Variable - ${args[0].value}`
   },
   args: [
     {
@@ -16,20 +16,17 @@ export const deletionTemplateTag: TemplateTag = {
       type: 'string',
     },
     {
-      displayName: 'Delete Variable only if Status Code matches',
+      displayName: 'Delete Variable only if Status Code matches regex (optional)',
       description: 'This field is optional. Exact status code and regex are allowed, e.g. "200" or "2.."',
       type: 'string',
       defaultValue: '',
-    },
-    {
-      displayName: args => (args[1].value === 'body' ? 'Response JSON Path' : 'Header Name'),
-      defaultValue: '',
-      type: 'string',
+      placeholder: 'examples: .+, 200, 2.., 4.., [4|5]..',
     },
   ],
   run: async (context: TemplateRunContext, variableNameArg: unknown, statusCodeMatcherArg: unknown) => {
     const variableName = variableNameArg as string
     const statusCodeMatcher = statusCodeMatcherArg as string
-    return createDeletionHeader({ variableName, statusCodeMatcher })
+    const workspaceId = context.meta.workspaceId
+    return createDeletionHeader({ variableName, statusCodeMatcher, workspaceId })
   },
 }

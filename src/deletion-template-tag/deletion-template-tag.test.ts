@@ -15,6 +15,7 @@ describe('Deletion Template Tag', () => {
     const expectedHeaderName = createDeletionHeader({
       variableName: 'ticketId',
       statusCodeMatcher: '2..',
+      workspaceId: 'wrk_12345',
     })
 
     expect(result).toEqual(expectedHeaderName)

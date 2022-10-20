@@ -12,7 +12,7 @@ export const deletionResponseHook: ResponseHook = async (context: ResponseHookCo
       const statusCode = context.response.getStatusCode()
       await deleteVariables(definitions, statusCode, context)
     } catch (e) {
-      console.log('Save Variables Plugin Response Hook Error', e)
+      console.log('Save Variables Plugin Deletion Response Hook Error', e)
     }
   }
 }
@@ -21,7 +21,7 @@ async function deleteVariables(definitions: DeletionDefinition[], statusCode: nu
   const promises = definitions.map(async def => {
     const regex = def.statusCodeMatcher ? new RegExp(def.statusCodeMatcher) : /.+/
     if (regex.test(statusCode + '')) {
-      const storeItemName = getVariableKey(context.meta.workspaceId, def.variableName)
+      const storeItemName = getVariableKey(def.workspaceId, def.variableName)
       await context.store.removeItem(storeItemName)
     }
   })

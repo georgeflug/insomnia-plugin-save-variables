@@ -24,6 +24,7 @@ describe('Deletion Header Request Hook', () => {
     const deletion: DeletionDefinition = {
       variableName: 'myVar',
       statusCodeMatcher: '200',
+      workspaceId: 'wrk1234',
     }
     const headerName = createDeletionHeader(deletion)
     headers.setHeader(headerName, 'doesNotMatter')
@@ -45,6 +46,7 @@ describe('Deletion Header Request Hook', () => {
     const deletion: DeletionDefinition = {
       variableName: 'myVar',
       statusCodeMatcher: '200',
+      workspaceId: 'wrk1234',
     }
     const headerName = createDeletionHeader(deletion)
     headers.setHeader(headerName, 'doesNotMatter')

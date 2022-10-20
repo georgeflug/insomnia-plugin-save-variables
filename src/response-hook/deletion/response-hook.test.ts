@@ -5,7 +5,7 @@ import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
 import { getVariableKey } from '../../variable-key'
 import { deletionResponseHook } from './response-hook'
 
-describe('Variable Saving Response Hook', () => {
+describe('Variable Deletion Response Hook', () => {
   const getStatusCodeMock = jest.fn()
   const store = createMockStore()
   const workspaceId = 'wrk_656565656'
@@ -25,9 +25,11 @@ describe('Variable Saving Response Hook', () => {
 
   it('should delete the variable when no status code matcher is present', async () => {
     const variableName = 'ticket'
+    await store.setItem(getVariableKey(workspaceId, variableName), 'myValue')
     const deletion: DeletionDefinition = {
       variableName,
       statusCodeMatcher: '',
+      workspaceId,
     }
     await store.setItem('variableDeletions', JSON.stringify([deletion]))
     getStatusCodeMock.mockReturnValue(200)
@@ -51,6 +53,7 @@ describe('Variable Saving Response Hook', () => {
     const deletion: DeletionDefinition = {
       variableName: 'ticket',
       statusCodeMatcher: '',
+      workspaceId,
     }
     await store.setItem('variableDeletions', JSON.stringify([deletion]))
     getStatusCodeMock.mockReturnValue(200)
@@ -64,6 +67,7 @@ describe('Variable Saving Response Hook', () => {
     const deletion: DeletionDefinition = {
       variableName: 'ticket',
       statusCodeMatcher: '',
+      workspaceId,
     }
     await store.setItem('variableDeletions', JSON.stringify([deletion]))
     getStatusCodeMock.mockReturnValue(200)
@@ -74,41 +78,72 @@ describe('Variable Saving Response Hook', () => {
   })
 
   it('should delete variable if status code matches regex', async () => {
+    const variableName = 'ticket'
     const deletion: DeletionDefinition = {
-      variableName: 'ticket',
+      variableName,
       statusCodeMatcher: '',
+      workspaceId,
     }
+    await store.setItem(getVariableKey(workspaceId, variableName), 'myValue')
     await store.setItem('variableDeletions', JSON.stringify([deletion]))
     getStatusCodeMock.mockReturnValue(200)
 
     await deletionResponseHook(context)
 
-    expect(await store.getItem('variable-ticket')).toEqual(null)
+    const result = await store.hasItem(getVariableKey(workspaceId, variableName))
+    expect(result).toEqual(false)
   })
 
   it('should not delete variable if status code does not match regex', async () => {
+    const variableName = 'ticket'
     const deletion: DeletionDefinition = {
-      variableName: 'ticket',
+      variableName,
       statusCodeMatcher: '',
+      workspaceId,
     }
+    await store.setItem(getVariableKey(workspaceId, variableName), 'myValue')
     await store.setItem('variableDeletions', JSON.stringify([deletion]))
     getStatusCodeMock.mockReturnValue(200)
 
     await deletionResponseHook(context)
 
-    expect(await store.getItem('variable-ticket')).toEqual(null)
+    const result = await store.hasItem(getVariableKey(workspaceId, variableName))
+    expect(result).toEqual(false)
   })
 
   it('should not delete variable if status code cannot be determined', async () => {
+    const variableName = 'ticket'
     const deletion: DeletionDefinition = {
-      variableName: 'ticket',
+      variableName,
       statusCodeMatcher: '',
+      workspaceId,
     }
+    await store.setItem(getVariableKey(workspaceId, variableName), 'myValue')
+    await store.setItem('variableDeletions', JSON.stringify([deletion]))
+    getStatusCodeMock.mockImplementation(() => {
+      throw new Error('Network Error')
+    })
+
+    await deletionResponseHook(context)
+
+    const result = await store.hasItem(getVariableKey(workspaceId, variableName))
+    expect(result).toEqual(true)
+  })
+
+  it('should not delete variable defined on another workspace', async () => {
+    const variableName = 'ticket'
+    const deletion: DeletionDefinition = {
+      variableName,
+      statusCodeMatcher: '',
+      workspaceId: 'different-workspace-id',
+    }
+    await store.setItem(getVariableKey(workspaceId, variableName), 'myValue')
     await store.setItem('variableDeletions', JSON.stringify([deletion]))
     getStatusCodeMock.mockReturnValue(200)
 
     await deletionResponseHook(context)
 
-    expect(await store.all()).toEqual([])
+    const result = await store.hasItem(getVariableKey(workspaceId, variableName))
+    expect(result).toEqual(true)
   })
 })

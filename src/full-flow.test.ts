@@ -105,6 +105,7 @@ describe('Test through entire system', () => {
     const deletionDefinition: DeletionDefinition = {
       variableName: 'ticketNumber',
       statusCodeMatcher: '',
+      workspaceId,
     }
 
     // save value into variable

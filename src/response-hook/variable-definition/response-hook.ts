@@ -13,7 +13,7 @@ export const variableSavingResponseHook: ResponseHook = async (context: Response
       const response = JSON.parse((context.response.getBody() || '').toString())
       await extractVariablesFromResponse(definitions, response, context)
     } catch (e) {
-      console.log('Save Variables Plugin Response Hook Error', e)
+      console.log('Save Variables Plugin Definition Response Hook Error', e)
     }
   }
 }

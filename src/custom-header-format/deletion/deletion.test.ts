@@ -5,6 +5,7 @@ describe('Deletion Header Format', () => {
     const deletionDefinition = {
       variableName: 'test',
       statusCodeMatcher: '2..',
+      workspaceId: 'wrk1234',
     } as DeletionDefinition
 
     const header = createDeletionHeader(deletionDefinition)
@@ -19,6 +20,7 @@ describe('Deletion Header Format', () => {
     const deletionDefinition = {
       variableName: 'test-var-name',
       statusCodeMatcher: '2..',
+      workspaceId: 'wrk1234',
     } as DeletionDefinition
 
     const header = createDeletionHeader(deletionDefinition)

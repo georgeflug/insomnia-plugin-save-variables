@@ -6,7 +6,4 @@ export type ResponseHookContext = {
   app: AppContext
   response: ResponseContext
   store: StoreContext
-  meta: {
-    workspaceId: string
-  }
 }
