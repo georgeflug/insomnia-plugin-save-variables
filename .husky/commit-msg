@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "\n\nLinting the commit message"
+
+
+if ! npx --no -- commitlint --edit; then
+  echo "The commit message must follow Conventional Commit format! Examples:"
+  echo "  feat: add new features"
+  echo "  fix: fix the bugs"
+  echo "  chore: bump library versions"
+  exit 1
+fi
