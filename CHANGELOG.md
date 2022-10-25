@@ -1,5 +1,12 @@
 
 
+## [3.2.2](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.2.1...v3.2.2) (2022-10-25)
+
+
+### Bug Fixes
+
+* remove comment copied from another file ([e1bbae6](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/e1bbae68570a1675171e1369755f38b1a95f13b6))
+
 ## [3.2.1](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.2.0...v3.2.1) (2022-10-25)
 
 
