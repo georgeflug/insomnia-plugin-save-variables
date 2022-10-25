@@ -5,11 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "npx tsc",
+    "build": "./build.sh",
     "lint": "eslint ./src --ext .ts",
     "start": "npm run build && node dist/index.js",
     "test": "jest",
-    "postinstall": "patch-package",
     "prepare": "husky install",
     "release": "release-it"
   },
