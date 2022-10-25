@@ -1,5 +1,13 @@
 
 
+## [3.2.1](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.2.0...v3.2.1) (2022-10-25)
+
+
+### Bug Fixes
+
+* fix script not executable on *nix ([85e204f](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/85e204fff23aa27abe09d6b34fa58ff8bbfe722e))
+* patch-package causes installation failure ([d457025](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/d4570257ac196b8831093a5e1ec54263f43a6ebd))
+
 # [3.2.0](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.0.5...v3.2.0) (2022-10-22)
 
 
