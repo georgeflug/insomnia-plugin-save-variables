@@ -18,12 +18,12 @@ export const definitionTemplateTag: TemplateTag = {
     {
       displayName: 'Attribute',
       type: 'enum',
-      defaultValue: 'body',
+      defaultValue: 'bodyJson',
       options: [
         {
           displayName: 'Body Attribute',
           description: 'value of response body',
-          value: 'body',
+          value: 'bodyJson',
         },
         {
           displayName: 'Header',
@@ -33,7 +33,7 @@ export const definitionTemplateTag: TemplateTag = {
       ],
     },
     {
-      displayName: args => (args[1].value === 'body' ? 'Response JSON Path' : 'Header Name'),
+      displayName: args => (args[1].value === 'bodyJson' ? 'Response JSON Path' : 'Header Name'),
       defaultValue: '',
       type: 'string',
     },

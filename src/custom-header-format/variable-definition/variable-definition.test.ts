@@ -9,7 +9,7 @@ describe('Variable Definition Header Format', () => {
   it('should create and parse variable definition header', () => {
     const variableDefinition = {
       variableName: 'test',
-      type: 'body',
+      type: 'bodyJson',
       path: '$.test',
       workspaceId: 'wrk_4efc4e7c4dea494ebb4d0280138c8893',
     } as VariableDefinition
