@@ -5,7 +5,11 @@ import { ValueExtractor } from './value-extractor'
 
 export const valueExtractorJson: ValueExtractor = {
   type: 'bodyJson',
-  display: 'JSON',
+  display: {
+    name: 'Body Attribute',
+    description: 'value of response body',
+    argument: 'Response JSON Path',
+  },
   extractFromResponse: async (
     variableDefinition: VariableDefinition,
     context: ResponseHookContext,

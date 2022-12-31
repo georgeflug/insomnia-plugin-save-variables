@@ -4,7 +4,11 @@ import { ValueExtractor } from './value-extractor'
 
 export const valueExtractorHeader: ValueExtractor = {
   type: 'header',
-  display: 'Header',
+  display: {
+    name: 'Header',
+    description: 'value of response header',
+    argument: 'Header Name',
+  },
   extractFromResponse: async (
     variableDefinition: VariableDefinition,
     context: ResponseHookContext,

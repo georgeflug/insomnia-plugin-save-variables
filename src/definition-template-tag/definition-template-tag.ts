@@ -1,6 +1,7 @@
 import { createVariableDefinitionHeader } from '../custom-header-format/variable-definition/variable-definition'
 import { TemplateRunContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
+import { allValueExtractors } from '../value-extractors/all-value-extractors'
 
 export const definitionTemplateTag: TemplateTag = {
   name: 'savevariable',
@@ -18,22 +19,15 @@ export const definitionTemplateTag: TemplateTag = {
     {
       displayName: 'Attribute',
       type: 'enum',
-      defaultValue: 'bodyJson',
-      options: [
-        {
-          displayName: 'Body Attribute',
-          description: 'value of response body',
-          value: 'bodyJson',
-        },
-        {
-          displayName: 'Header',
-          description: 'value of response header',
-          value: 'header',
-        },
-      ],
+      defaultValue: allValueExtractors[0].type,
+      options: allValueExtractors.map(e => ({
+        displayName: e.display.name,
+        description: e.display.description,
+        value: e.type,
+      })),
     },
     {
-      displayName: args => (args[1].value === 'bodyJson' ? 'Response JSON Path' : 'Header Name'),
+      displayName: args => allValueExtractors.find(e => e.type === args[1].value)?.display.argument ?? '',
       defaultValue: '',
       type: 'string',
     },

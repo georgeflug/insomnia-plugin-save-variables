@@ -3,7 +3,11 @@ import { ResponseHookContext } from '../insomnia/types/response-hook-context'
 
 export interface ValueExtractor {
   type: string
-  display: string
+  display: {
+    name: string
+    description: string
+    argument: string
+  }
   // todo: extractBefore: (variableDefinition: VariableDefinition, context: RequestHookContext) => Promise<string>
   extractFromResponse: (
     variableDefinition: VariableDefinition,
