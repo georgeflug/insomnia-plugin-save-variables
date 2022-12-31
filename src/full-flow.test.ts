@@ -45,6 +45,34 @@ describe('Test through entire system', () => {
     expect(result).toEqual(ticketNumber)
   })
 
+  it('should save static variable using request header and response hook', async () => {
+    const staticValue = 'this is the static value'
+    const workspaceId = 'wrk_23232323'
+    const context = {
+      request: createMockHeaders(),
+      response: {
+        getBody: jest.fn().mockReturnValue('doesNotMatter'),
+      },
+      store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
+    }
+    const variableDefinition: VariableDefinition = {
+      variableName: 'myValue',
+      type: 'static',
+      arg: staticValue,
+      workspaceId,
+    }
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
+
+    await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
+    await variableSavingResponseHook((context as unknown) as ResponseHookContext)
+    const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'myValue')
+
+    expect(result).toEqual(staticValue)
+  })
+
   it('should not be able to access variable that was saved in a different workspace', async () => {
     const ticketNumber = 'ID-123'
     const workspaceId = 'wrk_23232323'
