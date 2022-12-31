@@ -9,7 +9,7 @@ describe('Variable Definition Header Format', () => {
   it('should create and parse variable definition header', () => {
     const variableDefinition = {
       variableName: 'test',
-      attribute: 'body',
+      type: 'body',
       path: '$.test',
       workspaceId: 'wrk_4efc4e7c4dea494ebb4d0280138c8893',
     } as VariableDefinition
@@ -25,7 +25,7 @@ describe('Variable Definition Header Format', () => {
   it('should create and parse variable definition header with dashes in it', () => {
     const variableDefinition = {
       variableName: 'my-test-variable',
-      attribute: 'header',
+      type: 'header',
       path: '$.test-key',
       workspaceId: 'wrk_4efc4e7c4dea4-94ebb4d02-80138c8893',
     } as VariableDefinition

@@ -1,7 +1,4 @@
-import {
-  AttributeType,
-  createVariableDefinitionHeader,
-} from '../custom-header-format/variable-definition/variable-definition'
+import { createVariableDefinitionHeader } from '../custom-header-format/variable-definition/variable-definition'
 import { TemplateRunContext } from '../insomnia/types/template-context'
 import { TemplateTag, LiveDisplayArg } from '../insomnia/types/template-tag'
 
@@ -43,9 +40,9 @@ export const definitionTemplateTag: TemplateTag = {
   ],
   run: async (context: TemplateRunContext, variableNameArg: unknown, attributeArg: unknown, pathArg: unknown) => {
     const variableName = variableNameArg as string
-    const attribute = attributeArg as AttributeType
+    const type = attributeArg as string
     const path = pathArg as string
     const workspaceId = context.meta.workspaceId
-    return createVariableDefinitionHeader({ variableName, attribute, path, workspaceId })
+    return createVariableDefinitionHeader({ variableName, type, path, workspaceId })
   },
 }

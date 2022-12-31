@@ -19,7 +19,7 @@ export const variableSavingResponseHook: ResponseHook = async (context: Response
 }
 
 async function saveVariable(def: VariableDefinition, context: ResponseHookContext): Promise<void> {
-  const extractor = allValueExtractors.find(v => v.type === def.attribute)
+  const extractor = allValueExtractors.find(v => v.type === def.type)
   if (!extractor) throw new Error(`Could not find value extractor for variable ${def.variableName}`)
 
   const value = await extractor.extractFromResponse(def, context)

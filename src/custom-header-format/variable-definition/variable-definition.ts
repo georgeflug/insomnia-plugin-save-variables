@@ -2,12 +2,10 @@ import { createCustomHeader, parseCustomHeader } from '../base/custom-header-for
 
 export type VariableDefinition = {
   variableName: string
-  attribute: AttributeType
+  type: string
   path: string
   workspaceId: string
 }
-
-export type AttributeType = 'body' | 'header'
 
 const headerPrefix = 'X-Save-Variable'
 
@@ -19,7 +17,7 @@ export function createVariableDefinitionHeader(variableDefinition: VariableDefin
   return createCustomHeader(headerPrefix, [
     variableDefinition.workspaceId,
     variableDefinition.variableName,
-    variableDefinition.attribute,
+    variableDefinition.type,
     variableDefinition.path,
   ])
 }
@@ -29,7 +27,7 @@ export function parseVariableDefinitionHeader(headerName: string): VariableDefin
   return {
     workspaceId: parts[0],
     variableName: parts[1],
-    attribute: parts[2] as AttributeType,
+    type: parts[2],
     path: parts[3],
   }
 }

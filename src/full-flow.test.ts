@@ -32,7 +32,7 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      attribute: 'body',
+      type: 'body',
       path: '$.ticket',
       workspaceId,
     }
@@ -60,7 +60,7 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      attribute: 'body',
+      type: 'body',
       path: '$.ticket',
       workspaceId,
     }
@@ -98,7 +98,7 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      attribute: 'body',
+      type: 'body',
       path: '$.ticket',
       workspaceId,
     }
