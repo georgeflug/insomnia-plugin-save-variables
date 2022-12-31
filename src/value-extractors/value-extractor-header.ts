@@ -9,7 +9,7 @@ export const valueExtractorHeader: ValueExtractor = {
     variableDefinition: VariableDefinition,
     context: ResponseHookContext,
   ): Promise<string | null | undefined> => {
-    const header = context.response.getHeader(variableDefinition.path)
+    const header = context.response.getHeader(variableDefinition.arg)
     if (Array.isArray(header)) {
       return header[0]
     } else {

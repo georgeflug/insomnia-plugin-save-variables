@@ -33,7 +33,7 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       type: 'bodyJson',
-      path: '$.ticket',
+      arg: '$.ticket',
       workspaceId,
     }
     context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
@@ -61,7 +61,7 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       type: 'bodyJson',
-      path: '$.ticket',
+      arg: '$.ticket',
       workspaceId,
     }
     context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
@@ -99,7 +99,7 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       type: 'bodyJson',
-      path: '$.ticket',
+      arg: '$.ticket',
       workspaceId,
     }
     const deletionDefinition: DeletionDefinition = {

@@ -27,7 +27,7 @@ describe('Variable Declaration Header Request Hook', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'myVar',
       type: 'bodyJson',
-      path: '$.id',
+      arg: '$.id',
       workspaceId: 'wrk_213653457',
     }
     const headerName = createVariableDefinitionHeader(variableDefinition)
@@ -51,7 +51,7 @@ describe('Variable Declaration Header Request Hook', () => {
       workspaceId: 'wrk_123567456',
       variableName: 'myVar',
       type: 'bodyJson',
-      path: '$.id',
+      arg: '$.id',
     }
     const headerName = createVariableDefinitionHeader(variableDefinition)
     headers.setHeader(headerName, 'doesNotMatter')

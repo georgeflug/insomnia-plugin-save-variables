@@ -15,7 +15,7 @@ describe('Definition Template Tag', () => {
     const expectedHeaderName = createVariableDefinitionHeader({
       variableName: 'ticketId',
       type: 'bodyJson',
-      path: '$.id',
+      arg: '$.id',
       workspaceId: 'wrk_12345',
     })
 

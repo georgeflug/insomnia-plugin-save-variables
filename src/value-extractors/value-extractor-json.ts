@@ -12,7 +12,7 @@ export const valueExtractorJson: ValueExtractor = {
   ): Promise<string | null | undefined> => {
     const response = JSON.parse((context.response.getBody() || '').toString())
     return JSONPath<string>({
-      path: variableDefinition.path,
+      path: variableDefinition.arg,
       json: response,
       wrap: false,
     })

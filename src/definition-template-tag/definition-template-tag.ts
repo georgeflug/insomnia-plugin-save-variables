@@ -38,11 +38,11 @@ export const definitionTemplateTag: TemplateTag = {
       type: 'string',
     },
   ],
-  run: async (context: TemplateRunContext, variableNameArg: unknown, attributeArg: unknown, pathArg: unknown) => {
+  run: async (context: TemplateRunContext, variableNameArg: unknown, attributeArg: unknown, extraArg: unknown) => {
     const variableName = variableNameArg as string
     const type = attributeArg as string
-    const path = pathArg as string
+    const arg = extraArg as string
     const workspaceId = context.meta.workspaceId
-    return createVariableDefinitionHeader({ variableName, type, path, workspaceId })
+    return createVariableDefinitionHeader({ variableName, type, arg, workspaceId })
   },
 }

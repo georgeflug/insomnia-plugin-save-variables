@@ -10,7 +10,7 @@ describe('Variable Definition Header Format', () => {
     const variableDefinition = {
       variableName: 'test',
       type: 'bodyJson',
-      path: '$.test',
+      arg: '$.test',
       workspaceId: 'wrk_4efc4e7c4dea494ebb4d0280138c8893',
     } as VariableDefinition
 
@@ -26,7 +26,7 @@ describe('Variable Definition Header Format', () => {
     const variableDefinition = {
       variableName: 'my-test-variable',
       type: 'header',
-      path: '$.test-key',
+      arg: '$.test-key',
       workspaceId: 'wrk_4efc4e7c4dea4-94ebb4d02-80138c8893',
     } as VariableDefinition
 
