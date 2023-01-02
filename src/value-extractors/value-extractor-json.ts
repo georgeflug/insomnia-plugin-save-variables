@@ -4,7 +4,7 @@ import { ResponseHookContext } from '../insomnia/types/response-hook-context'
 import { ValueExtractor } from './value-extractor'
 
 export const valueExtractorJson: ValueExtractor = {
-  type: 'bodyJson',
+  type: 'body',
   display: {
     name: 'Body Attribute (JSON)',
     description: 'value of response body',
