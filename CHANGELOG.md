@@ -1,5 +1,18 @@
 
 
+# [3.3.0](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.2.2...v3.3.0) (2023-01-02)
+
+
+### Features
+
+* ability to save static values per request ([66e691b](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/66e691bbcdd510e8863383862d9d93f5d74b85fe))
+* extract values from xml ([89f34c9](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/89f34c9a73bf254d88be61466145f0689368b3fa))
+
+
+### Reverts
+
+* refactor: rename type ([6f425c0](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/6f425c0c4c665200d57be8b50968251111e2aefc))
+
 ## [3.2.2](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.2.1...v3.2.2) (2022-10-25)
 
 
