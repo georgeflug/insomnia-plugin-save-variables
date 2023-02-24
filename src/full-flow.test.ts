@@ -279,4 +279,33 @@ describe('Test through entire system', () => {
 
     expect(result).toEqual('my-value-456')
   })
+
+  it('should save variable from response code', async () => {
+    const workspaceId = 'wrk_23232323'
+    const context = {
+      request: createMockHeaders(),
+      response: {
+        getStatusCode: jest.fn().mockReturnValue(200),
+      },
+      store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
+    }
+    const variableDefinition: VariableDefinition = {
+      variableName: 'myValue',
+      source: 'responseCode',
+      sourceArg: '',
+      extractor: '',
+      extractorArg: '',
+      workspaceId,
+    }
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
+
+    await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
+    await variableSavingResponseHook((context as unknown) as ResponseHookContext)
+    const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'myValue')
+
+    expect(result).toEqual('200')
+  })
 })
