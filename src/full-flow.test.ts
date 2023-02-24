@@ -33,8 +33,9 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.ticket',
+      extractorArg: '$.ticket',
       workspaceId,
     }
     context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
@@ -66,8 +67,9 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'xml',
-      arg: '//ticket/text()',
+      extractorArg: '//ticket/text()',
       workspaceId,
     }
     context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
@@ -95,8 +97,9 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'myValue',
       source: 'static',
-      extractor: 'static',
-      arg: staticValue,
+      sourceArg: staticValue,
+      extractor: '',
+      extractorArg: '',
       workspaceId,
     }
     context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
@@ -124,8 +127,9 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.ticket',
+      extractorArg: '$.ticket',
       workspaceId,
     }
     context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
@@ -163,8 +167,9 @@ describe('Test through entire system', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.ticket',
+      extractorArg: '$.ticket',
       workspaceId,
     }
     const deletionDefinition: DeletionDefinition = {

@@ -10,13 +10,14 @@ describe('Definition Template Tag', () => {
   } as TemplateRunContext
 
   it('should return formatted header name', async () => {
-    const result = await definitionTemplateTag.run(context, 'ticketId', 'responseBody', 'json', '$.id')
+    const result = await definitionTemplateTag.run(context, 'ticketId', 'responseBody', '', 'json', '$.id')
 
     const expectedHeaderName = createVariableDefinitionHeader({
       variableName: 'ticketId',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.id',
+      extractorArg: '$.id',
       workspaceId: 'wrk_12345',
     })
 

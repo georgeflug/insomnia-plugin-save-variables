@@ -22,14 +22,18 @@ export const variableSavingResponseHook: ResponseHook = async (context: Response
 
 async function saveVariable(def: VariableDefinition, context: ResponseHookContext): Promise<void> {
   const source = allValueSources.find(v => v.type === def.source)
-  const extractor = allValueExtractors.find(v => v.type === def.extractor)
   if (!source) throw new Error(`Could not find source for variable ${def.variableName}`)
-  if (!extractor) throw new Error(`Could not find value extractor for variable ${def.variableName}`)
 
-  const value = await source?.extractFromResponse(def, context)
-  const extractedValue = value == null ? value : await extractor.extract(value, def.arg)
-  if (extractedValue !== undefined) {
-    const result = extractedValue === null ? null : extractedValue.toString()
+  let value = await source?.extractFromResponse(def, context)
+
+  if (source.canBeExtracted && value != null) {
+    const extractor = allValueExtractors.find(v => v.type === def.extractor)
+    if (!extractor) throw new Error(`Could not find value extractor for variable ${def.variableName}`)
+    value = await extractor.extract(value, def.extractorArg ?? '')
+  }
+
+  if (value !== undefined) {
+    const result = value === null ? null : value.toString()
     const key = getVariableKey(def.workspaceId, def.variableName)
     await context.store.setItem(key, result)
   }

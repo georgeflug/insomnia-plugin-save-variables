@@ -5,6 +5,7 @@ import { ValueSource } from './value-source'
 export const valueSourceResponseBody: ValueSource = {
   type: 'responseBody',
   displayName: 'Response Body',
+  canBeExtracted: true,
   extractFromResponse: async (
     _variableDefinition: VariableDefinition,
     context: ResponseHookContext,

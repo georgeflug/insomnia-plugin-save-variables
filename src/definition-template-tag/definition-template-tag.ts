@@ -28,7 +28,14 @@ export const definitionTemplateTag: TemplateTag = {
       })),
     },
     {
+      displayName: args => getSourceArgName(args),
+      hide: args => !hasSourceArg(args),
+      defaultValue: '',
+      type: 'string',
+    },
+    {
       displayName: 'Extractor',
+      hide: args => !hasExtractor(args),
       type: 'enum',
       defaultValue: allValueExtractors[0].type,
       options: allValueExtractors.map(e => ({
@@ -37,7 +44,8 @@ export const definitionTemplateTag: TemplateTag = {
       })),
     },
     {
-      displayName: args => allValueExtractors.find(e => e.type === args[1].value)?.argumentName ?? '',
+      displayName: args => getExtractorArgName(args),
+      hide: args => !hasExtractor(args) || !hasExtractorArg(args),
       defaultValue: '',
       type: 'string',
     },
@@ -70,7 +78,7 @@ const legacyLookup: Record<string, { source: string; extractor: string }> = {
   },
 }
 
-export function runLegacyTag(context: TemplateRunContext, args: unknown[]): string {
+function runLegacyTag(context: TemplateRunContext, args: unknown[]): string {
   const variableName = args[0] as string
   const type = args[1] as string
   const arg = args[2] as string
@@ -90,11 +98,32 @@ export function runLegacyTag(context: TemplateRunContext, args: unknown[]): stri
   return message
 }
 
-export function runTag(context: TemplateRunContext, args: unknown[]): string {
+function runTag(context: TemplateRunContext, args: unknown[]): string {
   const variableName = args[0] as string
   const source = args[1] as string
-  const extractor = args[2] as string
-  const arg = args[3] as string
+  const sourceArg = args[2] as string
+  const extractor = args[3] as string
+  const extractorArg = args[4] as string
   const workspaceId = context.meta.workspaceId
-  return createVariableDefinitionHeader({ variableName, source, extractor, arg, workspaceId })
+  return createVariableDefinitionHeader({ variableName, source, sourceArg, extractor, extractorArg, workspaceId })
+}
+
+function hasSourceArg(args: { value: unknown }[]): boolean {
+  return !!getSourceArgName(args)
+}
+
+function getSourceArgName(args: { value: unknown }[]): string {
+  return allValueSources.find(s => s.type === args[1].value)?.argumentName ?? ''
+}
+
+function hasExtractor(args: { value: unknown }[]): boolean {
+  return !!allValueSources.find(s => s.type === args[1].value)?.canBeExtracted
+}
+
+function hasExtractorArg(args: { value: unknown }[]): boolean {
+  return !!getSourceArgName(args)
+}
+
+function getExtractorArgName(args: { value: unknown }[]): string {
+  return allValueExtractors.find(e => e.type === args[3].value)?.argumentName ?? ''
 }

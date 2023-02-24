@@ -3,8 +3,9 @@ import { createCustomHeader, parseCustomHeader } from '../base/custom-header-for
 export type VariableDefinition = {
   variableName: string
   source: string
+  sourceArg?: string
   extractor: string
-  arg: string
+  extractorArg?: string
   workspaceId: string
 }
 
@@ -19,8 +20,9 @@ export function createVariableDefinitionHeader(variableDefinition: VariableDefin
     variableDefinition.workspaceId,
     variableDefinition.variableName,
     variableDefinition.source,
+    variableDefinition.sourceArg ?? '',
     variableDefinition.extractor,
-    variableDefinition.arg,
+    variableDefinition.extractorArg ?? '',
   ])
 }
 
@@ -30,7 +32,8 @@ export function parseVariableDefinitionHeader(headerName: string): VariableDefin
     workspaceId: parts[0],
     variableName: parts[1],
     source: parts[2],
-    extractor: parts[3],
-    arg: parts[4],
+    sourceArg: parts[3],
+    extractor: parts[4],
+    extractorArg: parts[5],
   }
 }

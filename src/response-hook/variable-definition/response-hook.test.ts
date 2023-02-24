@@ -28,8 +28,9 @@ describe('Variable Saving Response Hook', () => {
     const variableDefinition: VariableDefinition = {
       variableName,
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.ticketId',
+      extractorArg: '$.ticketId',
       workspaceId,
     }
     const body = {
@@ -57,8 +58,9 @@ describe('Variable Saving Response Hook', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$',
+      extractorArg: '$',
       workspaceId,
     }
     const body = {
@@ -77,8 +79,9 @@ describe('Variable Saving Response Hook', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.doesNotExist',
+      extractorArg: '$.doesNotExist',
       workspaceId,
     }
     const body = {
@@ -96,8 +99,9 @@ describe('Variable Saving Response Hook', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.ticketId',
+      extractorArg: '$.ticketId',
       workspaceId,
     }
     const body = {
@@ -115,8 +119,9 @@ describe('Variable Saving Response Hook', () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.ticketId',
+      extractorArg: '$.ticketId',
       workspaceId,
     }
     const body = 'Hello. I am not JSON'

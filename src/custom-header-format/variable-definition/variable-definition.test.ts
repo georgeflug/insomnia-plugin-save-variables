@@ -10,8 +10,9 @@ describe('Variable Definition Header Format', () => {
     const variableDefinition = {
       variableName: 'test',
       source: 'responseBody',
+      sourceArg: '',
       extractor: 'json',
-      arg: '$.test',
+      extractorArg: '$.test',
       workspaceId: 'wrk_4efc4e7c4dea494ebb4d0280138c8893',
     } as VariableDefinition
 
@@ -27,8 +28,9 @@ describe('Variable Definition Header Format', () => {
     const variableDefinition = {
       variableName: 'my-test-variable',
       source: 'responseHeader',
+      sourceArg: 'X-My-Header',
       extractor: 'static',
-      arg: '$.test-key',
+      extractorArg: '',
       workspaceId: 'wrk_4efc4e7c4dea4-94ebb4d02-80138c8893',
     } as VariableDefinition
 
