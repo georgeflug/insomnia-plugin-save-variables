@@ -24,7 +24,7 @@ async function saveVariable(def: VariableDefinition, context: ResponseHookContex
   const source = allValueSources.find(v => v.type === def.source)
   if (!source) throw new Error(`Could not find source for variable ${def.variableName}`)
 
-  let value = await source?.extractFromResponse(def, context)
+  let value = await source?.extractFromResponse(def.sourceArg ?? '', context)
 
   if (source.canBeExtracted && value != null) {
     const extractor = allValueExtractors.find(v => v.type === def.extractor)
