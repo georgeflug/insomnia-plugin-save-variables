@@ -17,7 +17,7 @@ import { deletionResponseHook } from './response-hook/deletion/response-hook'
 jest.mock('sweetalert', () => ({}))
 
 describe('Test through entire system', () => {
-  it('should save json variable using request header and response hook', async () => {
+  it('should save json variable from response body', async () => {
     const ticketNumber = 'ID-123'
     const workspaceId = 'wrk_23232323'
     const context = {
@@ -47,7 +47,7 @@ describe('Test through entire system', () => {
     expect(result).toEqual(ticketNumber)
   })
 
-  it('should save xml variable using request header and response hook', async () => {
+  it('should save xml variable from response body', async () => {
     const ticketNumber = 'ID-123'
     const workspaceId = 'wrk_23232323'
     const context = {
@@ -81,7 +81,7 @@ describe('Test through entire system', () => {
     expect(result).toEqual(ticketNumber)
   })
 
-  it('should save static variable using request header and response hook', async () => {
+  it('should save static variable', async () => {
     const staticValue = 'this is the static value'
     const workspaceId = 'wrk_23232323'
     const context = {
@@ -194,7 +194,7 @@ describe('Test through entire system', () => {
     expect(result).toEqual('No variable with name "ticketNumber". No variables have been set yet.')
   })
 
-  it('should save json variable from request body using request header and response hook', async () => {
+  it('should save json variable from request body', async () => {
     const workspaceId = 'wrk_23232323'
     const context = {
       request: {
@@ -222,5 +222,61 @@ describe('Test through entire system', () => {
     const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'ticketNumber')
 
     expect(result).toEqual('val123')
+  })
+
+  it('should save variable from response header', async () => {
+    const workspaceId = 'wrk_23232323'
+    const context = {
+      request: createMockHeaders(),
+      response: createMockHeaders(),
+      store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
+    }
+    const variableDefinition: VariableDefinition = {
+      variableName: 'myValue',
+      source: 'responseHeader',
+      sourceArg: 'X-My-Header',
+      extractor: '',
+      extractorArg: '',
+      workspaceId,
+    }
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
+    context.response.setHeader('X-My-Header', 'my-value-456')
+
+    await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
+    await variableSavingResponseHook((context as unknown) as ResponseHookContext)
+    const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'myValue')
+
+    expect(result).toEqual('my-value-456')
+  })
+
+  it('should save variable from request header', async () => {
+    const workspaceId = 'wrk_23232323'
+    const context = {
+      request: createMockHeaders(),
+      response: createMockHeaders(),
+      store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
+    }
+    const variableDefinition: VariableDefinition = {
+      variableName: 'myValue',
+      source: 'requestHeader',
+      sourceArg: 'X-My-Header',
+      extractor: '',
+      extractorArg: '',
+      workspaceId,
+    }
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
+    context.request.setHeader('X-My-Header', 'my-value-456')
+
+    await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
+    await variableSavingResponseHook((context as unknown) as ResponseHookContext)
+    const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'myValue')
+
+    expect(result).toEqual('my-value-456')
   })
 })
