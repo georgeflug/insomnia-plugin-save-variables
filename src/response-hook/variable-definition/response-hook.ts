@@ -1,4 +1,5 @@
 import { VariableDefinition } from '../../custom-header-format/variable-definition/variable-definition'
+import { pluginGlobal } from '../../global/plugin-global'
 import { ResponseHook } from '../../insomnia/types/response-hook'
 import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
 import { log, LogLevel } from '../../logger/log'
@@ -7,11 +8,12 @@ import { allValueSources } from '../../value-sources/all-value-sources'
 import { getVariableKey } from '../../variable-key'
 
 export const variableSavingResponseHook: ResponseHook = async (context: ResponseHookContext) => {
-  const serializedDefinitions = await context.store.getItem('variableDefinitions')
-  await context.store.removeItem('variableDefinitions')
-  if (serializedDefinitions) {
+  if (pluginGlobal.currentRequestVariableDefinitions?.length) {
     try {
-      const definitions = JSON.parse(serializedDefinitions) as VariableDefinition[]
+      const definitions = pluginGlobal.currentRequestVariableDefinitions
+      pluginGlobal.currentRequestVariableDefinitions = []
+      pluginGlobal.currentRequestContext = null
+
       const promises = definitions.map(async def => saveVariable(def, context))
       await Promise.all(promises)
     } catch (e) {

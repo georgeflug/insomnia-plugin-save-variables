@@ -7,6 +7,7 @@ import {
   createVariableDefinitionHeader,
   VariableDefinition,
 } from '../../custom-header-format/variable-definition/variable-definition'
+import { pluginGlobal } from '../../global/plugin-global'
 
 describe('Variable Declaration Header Request Hook', () => {
   const store = createMockStore()
@@ -62,6 +63,6 @@ describe('Variable Declaration Header Request Hook', () => {
 
     await variableDeclarationHeaderRequestHook(context)
 
-    expect(await store.getItem('variableDefinitions')).toEqual(JSON.stringify([variableDefinition]))
+    expect(pluginGlobal.currentRequestVariableDefinitions).toEqual([variableDefinition])
   })
 })

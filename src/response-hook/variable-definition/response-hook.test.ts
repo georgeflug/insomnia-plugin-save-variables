@@ -1,4 +1,5 @@
 import { VariableDefinition } from '../../custom-header-format/variable-definition/variable-definition'
+import { pluginGlobal } from '../../global/plugin-global'
 import { createMockStore } from '../../insomnia/mocks/store-mock'
 import { ResponseContext } from '../../insomnia/types/response-context'
 import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
@@ -37,7 +38,7 @@ describe('Variable Saving Response Hook', () => {
       someValue: 'test',
       ticketId: '123',
     }
-    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
+    pluginGlobal.currentRequestVariableDefinitions = [variableDefinition]
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -67,7 +68,7 @@ describe('Variable Saving Response Hook', () => {
       someValue: 'test',
       ticketId: '123',
     }
-    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
+    pluginGlobal.currentRequestVariableDefinitions = [variableDefinition]
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -87,7 +88,7 @@ describe('Variable Saving Response Hook', () => {
     const body = {
       ticketId: '123',
     }
-    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
+    pluginGlobal.currentRequestVariableDefinitions = [variableDefinition]
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -107,7 +108,7 @@ describe('Variable Saving Response Hook', () => {
     const body = {
       ticketId: null,
     }
-    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
+    pluginGlobal.currentRequestVariableDefinitions = [variableDefinition]
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -125,7 +126,7 @@ describe('Variable Saving Response Hook', () => {
       workspaceId,
     }
     const body = 'Hello. I am not JSON'
-    await store.setItem('variableDefinitions', JSON.stringify([variableDefinition]))
+    pluginGlobal.currentRequestVariableDefinitions = [variableDefinition]
     getBodyMock.mockReturnValue(body)
 
     await variableSavingResponseHook(context)
