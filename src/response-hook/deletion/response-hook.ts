@@ -1,6 +1,7 @@
 import { DeletionDefinition } from '../../custom-header-format/deletion/deletion'
 import { ResponseHook } from '../../insomnia/types/response-hook'
 import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
+import { log, LogLevel } from '../../logger/log'
 import { getVariableKey } from '../../variable-key'
 
 export const deletionResponseHook: ResponseHook = async (context: ResponseHookContext) => {
@@ -12,7 +13,7 @@ export const deletionResponseHook: ResponseHook = async (context: ResponseHookCo
       const statusCode = context.response.getStatusCode()
       await deleteVariables(definitions, statusCode, context)
     } catch (e) {
-      console.log('Save Variables Plugin Deletion Response Hook Error', e)
+      log(LogLevel.ERROR, 'Deletion Response Hook Error', e)
     }
   }
 }

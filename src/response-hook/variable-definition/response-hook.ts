@@ -1,6 +1,7 @@
 import { VariableDefinition } from '../../custom-header-format/variable-definition/variable-definition'
 import { ResponseHook } from '../../insomnia/types/response-hook'
 import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
+import { log, LogLevel } from '../../logger/log'
 import { allValueExtractors } from '../../value-extractors/all-value-extractors'
 import { getVariableKey } from '../../variable-key'
 
@@ -13,7 +14,7 @@ export const variableSavingResponseHook: ResponseHook = async (context: Response
       const promises = definitions.map(async def => saveVariable(def, context))
       await Promise.all(promises)
     } catch (e) {
-      console.log('Save Variables Plugin Definition Response Hook Error', e)
+      log(LogLevel.ERROR, 'Variable Definition Response Hook Error', e)
     }
   }
 }
