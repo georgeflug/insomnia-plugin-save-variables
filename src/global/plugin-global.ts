@@ -1,9 +1,9 @@
 import { VariableDefinition } from '../custom-header-format/variable-definition/variable-definition'
-import { RequestContext } from '../insomnia/types/request-context'
+import { RequestHookContext } from '../insomnia/types/request-hook-context'
 
 export const pluginGlobal: {
   currentRequestVariableDefinitions: VariableDefinition[]
-  currentRequestContext: RequestContext | null
+  currentRequestContext: RequestHookContext | null
 } = {
   currentRequestVariableDefinitions: [],
   currentRequestContext: null,

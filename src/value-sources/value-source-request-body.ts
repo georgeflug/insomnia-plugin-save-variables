@@ -2,16 +2,15 @@ import { RequestHookContext } from '../insomnia/types/request-hook-context'
 import { ResponseHookContext } from '../insomnia/types/response-hook-context'
 import { ValueSource } from './value-source'
 
-export const valueSourceStatic: ValueSource = {
-  type: 'static',
-  displayName: 'Static Value',
-  canBeExtracted: false,
-  argumentName: 'Value',
+export const valueSourceRequestBody: ValueSource = {
+  type: 'requestBody',
+  displayName: 'Request Body',
+  canBeExtracted: true,
   extract: async (
-    argValue: string,
-    _request: RequestHookContext,
+    _argValue: string,
+    request: RequestHookContext,
     _response: ResponseHookContext,
   ): Promise<string | null | undefined> => {
-    return argValue
+    return request.request.getBodyText() || ''
   },
 }

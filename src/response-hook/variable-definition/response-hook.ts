@@ -1,5 +1,6 @@
 import { VariableDefinition } from '../../custom-header-format/variable-definition/variable-definition'
 import { pluginGlobal } from '../../global/plugin-global'
+import { RequestHookContext } from '../../insomnia/types/request-hook-context'
 import { ResponseHook } from '../../insomnia/types/response-hook'
 import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
 import { log, LogLevel } from '../../logger/log'
@@ -8,13 +9,14 @@ import { allValueSources } from '../../value-sources/all-value-sources'
 import { getVariableKey } from '../../variable-key'
 
 export const variableSavingResponseHook: ResponseHook = async (context: ResponseHookContext) => {
-  if (pluginGlobal.currentRequestVariableDefinitions?.length) {
+  const definitions = pluginGlobal.currentRequestVariableDefinitions
+  const request = pluginGlobal.currentRequestContext
+  if (definitions?.length && request) {
     try {
-      const definitions = pluginGlobal.currentRequestVariableDefinitions
       pluginGlobal.currentRequestVariableDefinitions = []
       pluginGlobal.currentRequestContext = null
 
-      const promises = definitions.map(async def => saveVariable(def, context))
+      const promises = definitions.map(async def => saveVariable(def, request, context))
       await Promise.all(promises)
     } catch (e) {
       log(LogLevel.ERROR, 'Variable Definition Response Hook Error', e)
@@ -22,11 +24,15 @@ export const variableSavingResponseHook: ResponseHook = async (context: Response
   }
 }
 
-async function saveVariable(def: VariableDefinition, context: ResponseHookContext): Promise<void> {
+async function saveVariable(
+  def: VariableDefinition,
+  request: RequestHookContext,
+  context: ResponseHookContext,
+): Promise<void> {
   const source = allValueSources.find(v => v.type === def.source)
   if (!source) throw new Error(`Could not find source for variable ${def.variableName}`)
 
-  let value = await source?.extractFromResponse(def.sourceArg ?? '', context)
+  let value = await source?.extract(def.sourceArg ?? '', request, context)
 
   if (source.canBeExtracted && value != null) {
     const extractor = allValueExtractors.find(v => v.type === def.extractor)

@@ -12,4 +12,5 @@ export const variableDeclarationHeaderRequestHook: RequestHook = async (context:
   customHeaderNames.forEach(name => context.request.removeHeader(name))
   const variableDefinitions = customHeaderNames.map(parseVariableDefinitionHeader)
   pluginGlobal.currentRequestVariableDefinitions = variableDefinitions
+  pluginGlobal.currentRequestContext = context
 }

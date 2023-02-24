@@ -193,4 +193,34 @@ describe('Test through entire system', () => {
     const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'ticketNumber')
     expect(result).toEqual('No variable with name "ticketNumber". No variables have been set yet.')
   })
+
+  it('should save json variable from request body using request header and response hook', async () => {
+    const workspaceId = 'wrk_23232323'
+    const context = {
+      request: {
+        ...createMockHeaders(),
+        getBodyText: jest.fn().mockReturnValue(`{"key": "val123"}`),
+      },
+      response: {},
+      store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
+    }
+    const variableDefinition: VariableDefinition = {
+      variableName: 'ticketNumber',
+      source: 'requestBody',
+      sourceArg: '',
+      extractor: 'json',
+      extractorArg: '$.key',
+      workspaceId,
+    }
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
+
+    await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
+    await variableSavingResponseHook((context as unknown) as ResponseHookContext)
+    const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'ticketNumber')
+
+    expect(result).toEqual('val123')
+  })
 })

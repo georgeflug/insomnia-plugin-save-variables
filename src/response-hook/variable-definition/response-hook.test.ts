@@ -1,6 +1,7 @@
 import { VariableDefinition } from '../../custom-header-format/variable-definition/variable-definition'
 import { pluginGlobal } from '../../global/plugin-global'
 import { createMockStore } from '../../insomnia/mocks/store-mock'
+import { RequestHookContext } from '../../insomnia/types/request-hook-context'
 import { ResponseContext } from '../../insomnia/types/response-context'
 import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
 import { getVariableKey } from '../../variable-key'
@@ -39,6 +40,7 @@ describe('Variable Saving Response Hook', () => {
       ticketId: '123',
     }
     pluginGlobal.currentRequestVariableDefinitions = [variableDefinition]
+    pluginGlobal.currentRequestContext = {} as RequestHookContext
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)

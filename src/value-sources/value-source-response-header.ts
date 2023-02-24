@@ -1,3 +1,4 @@
+import { RequestHookContext } from '../insomnia/types/request-hook-context'
 import { ResponseHookContext } from '../insomnia/types/response-hook-context'
 import { ValueSource } from './value-source'
 
@@ -6,8 +7,12 @@ export const valueSourceResponseHeader: ValueSource = {
   displayName: 'Response Header',
   canBeExtracted: false,
   argumentName: 'Header Name',
-  extractFromResponse: async (argValue: string, context: ResponseHookContext): Promise<string | null | undefined> => {
-    const header = context.response.getHeader(argValue ?? '')
+  extract: async (
+    argValue: string,
+    _request: RequestHookContext,
+    response: ResponseHookContext,
+  ): Promise<string | null | undefined> => {
+    const header = response.response.getHeader(argValue ?? '')
     if (Array.isArray(header)) {
       return header[0]
     } else {
