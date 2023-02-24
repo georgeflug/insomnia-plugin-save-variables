@@ -32,7 +32,8 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$.ticket',
       workspaceId,
     }
@@ -64,7 +65,8 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      type: 'bodyXml',
+      source: 'responseBody',
+      extractor: 'xml',
       arg: '//ticket/text()',
       workspaceId,
     }
@@ -92,7 +94,8 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'myValue',
-      type: 'static',
+      source: 'static',
+      extractor: 'static',
       arg: staticValue,
       workspaceId,
     }
@@ -120,7 +123,8 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$.ticket',
       workspaceId,
     }
@@ -158,7 +162,8 @@ describe('Test through entire system', () => {
     }
     const variableDefinition: VariableDefinition = {
       variableName: 'ticketNumber',
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$.ticket',
       workspaceId,
     }

@@ -27,7 +27,8 @@ describe('Variable Saving Response Hook', () => {
     const variableName = 'ticket'
     const variableDefinition: VariableDefinition = {
       variableName,
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$.ticketId',
       workspaceId,
     }
@@ -55,7 +56,8 @@ describe('Variable Saving Response Hook', () => {
   it('should remove variable definitions after using them so that they do not get reused by a different request', async () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$',
       workspaceId,
     }
@@ -74,7 +76,8 @@ describe('Variable Saving Response Hook', () => {
   it('should not save variable if key cannot be found at path specified by json path', async () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$.doesNotExist',
       workspaceId,
     }
@@ -92,7 +95,8 @@ describe('Variable Saving Response Hook', () => {
   it('should save variable if value at key is expicitly null', async () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$.ticketId',
       workspaceId,
     }
@@ -110,7 +114,8 @@ describe('Variable Saving Response Hook', () => {
   it('should not save variable if response body cannot be parsed as json', async () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
-      type: 'body',
+      source: 'responseBody',
+      extractor: 'json',
       arg: '$.ticketId',
       workspaceId,
     }

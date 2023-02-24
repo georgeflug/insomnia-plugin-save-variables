@@ -1,14 +1,10 @@
 import { VariableDefinition } from '../custom-header-format/variable-definition/variable-definition'
 import { ResponseHookContext } from '../insomnia/types/response-hook-context'
-import { ValueExtractor } from './value-extractor'
+import { ValueSource } from './value-source'
 
-export const valueExtractorHeader: ValueExtractor = {
-  type: 'header',
-  display: {
-    name: 'Header',
-    description: 'value of response header',
-    argument: 'Header Name',
-  },
+export const valueSourceResponseHeader: ValueSource = {
+  type: 'responseHeader',
+  displayName: 'Response Header',
   extractFromResponse: async (
     variableDefinition: VariableDefinition,
     context: ResponseHookContext,

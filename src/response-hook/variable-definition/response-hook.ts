@@ -3,6 +3,7 @@ import { ResponseHook } from '../../insomnia/types/response-hook'
 import { ResponseHookContext } from '../../insomnia/types/response-hook-context'
 import { log, LogLevel } from '../../logger/log'
 import { allValueExtractors } from '../../value-extractors/all-value-extractors'
+import { allValueSources } from '../../value-sources/all-value-sources'
 import { getVariableKey } from '../../variable-key'
 
 export const variableSavingResponseHook: ResponseHook = async (context: ResponseHookContext) => {
@@ -20,12 +21,15 @@ export const variableSavingResponseHook: ResponseHook = async (context: Response
 }
 
 async function saveVariable(def: VariableDefinition, context: ResponseHookContext): Promise<void> {
-  const extractor = allValueExtractors.find(v => v.type === def.type)
+  const source = allValueSources.find(v => v.type === def.source)
+  const extractor = allValueExtractors.find(v => v.type === def.extractor)
+  if (!source) throw new Error(`Could not find source for variable ${def.variableName}`)
   if (!extractor) throw new Error(`Could not find value extractor for variable ${def.variableName}`)
 
-  const value = await extractor.extractFromResponse(def, context)
-  if (value !== undefined) {
-    const result = value === null ? null : value.toString()
+  const value = await source?.extractFromResponse(def, context)
+  const extractedValue = value == null ? value : await extractor.extract(value, def.arg)
+  if (extractedValue !== undefined) {
+    const result = extractedValue === null ? null : extractedValue.toString()
     const key = getVariableKey(def.workspaceId, def.variableName)
     await context.store.setItem(key, result)
   }

@@ -1,16 +1,6 @@
-import { VariableDefinition } from '../custom-header-format/variable-definition/variable-definition'
-import { ResponseHookContext } from '../insomnia/types/response-hook-context'
-
 export interface ValueExtractor {
   type: string
-  display: {
-    name: string
-    description: string
-    argument: string
-  }
-  // todo: extractBefore: (variableDefinition: VariableDefinition, context: RequestHookContext) => Promise<string>
-  extractFromResponse: (
-    variableDefinition: VariableDefinition,
-    context: ResponseHookContext,
-  ) => Promise<string | null | undefined>
+  displayName: string
+  argumentName: string
+  extract: (sourceValue: string, extractionArgument: string) => Promise<string | null | undefined>
 }
