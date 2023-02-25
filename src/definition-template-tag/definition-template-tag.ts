@@ -59,10 +59,10 @@ export const definitionTemplateTag: TemplateTag = {
   },
 }
 
-const legacyLookup: Record<string, { source: string; extractor: string }> = {
+const legacyLookup: Record<string, { source: string; extractor: string | null }> = {
   header: {
     source: 'responseHeader',
-    extractor: 'static',
+    extractor: null,
   },
   body: {
     source: 'responseBody',
@@ -74,26 +74,31 @@ const legacyLookup: Record<string, { source: string; extractor: string }> = {
   },
   static: {
     source: 'static',
-    extractor: 'static',
+    extractor: null,
   },
 }
 
-function runLegacyTag(context: TemplateRunContext, args: unknown[]): string {
+function runLegacyTag(_context: TemplateRunContext, args: unknown[]): string {
   const variableName = args[0] as string
   const type = args[1] as string
   const arg = args[2] as string
   const { source, extractor } = legacyLookup[type]
 
+  const instructions = []
+  instructions.push(`Save these instructions so that you don't lose them while following the remaining steps.`)
   const sourceName = allValueSources.find(s => s.type === source)?.displayName ?? source
-  const extractorName = allValueExtractors.find(e => e.type === extractor)?.displayName ?? extractor
+  instructions.push(`Select "${sourceName}" in the "Source" field above.`)
+  if (extractor !== null) {
+    const extractorName = allValueExtractors.find(e => e.type === extractor)?.displayName ?? extractor
+    instructions.push(`Select "${extractorName}" in the "Extractor" field above.`)
+  }
+  instructions.push(`Enter "${arg}" in the remaining field above.`)
 
-  const message = `insomnia-plugin-save-variables has a breaking change! Please migrate to the new fields with these instructions:
+  const numberedInstructions = instructions.map((text, i) => `${i + 1}. ${text}`).join('\n')
+  const message = `insomnia-plugin-save-variables has a breaking change! Migrate to the new fields with these instructions:
+  
+${numberedInstructions}`
 
-1. Save these instructions so that you don't lose them while following the remaining steps.
-2. Select "${sourceName}" in the "Source" field above.
-3. Select "${extractorName}" in the "Extractor" field above.
-4. Enter "${arg}" in the remaining field above.
-`
   log(LogLevel.WARN, `Save Variable - ${variableName}\n${message}`)
   return message
 }
