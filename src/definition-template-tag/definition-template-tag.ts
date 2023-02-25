@@ -121,7 +121,7 @@ function hasExtractor(args: { value: unknown }[]): boolean {
 }
 
 function hasExtractorArg(args: { value: unknown }[]): boolean {
-  return !!getSourceArgName(args)
+  return !!getExtractorArgName(args)
 }
 
 function getExtractorArgName(args: { value: unknown }[]): string {
