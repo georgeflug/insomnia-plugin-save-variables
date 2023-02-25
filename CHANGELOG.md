@@ -1,5 +1,12 @@
 
 
+## [4.0.2](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.1...v4.0.2) (2023-02-25)
+
+
+### Bug Fixes
+
+* rename xml to xpath ([2185493](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/218549361755d2da5c549534d5a45ed766ba439e))
+
 ## [4.0.1](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.4.0...v4.0.1) (2023-02-25)
 
 # [4.0.0](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.3.0...v4.0.0) (2023-02-25)
