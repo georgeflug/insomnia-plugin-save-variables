@@ -20,7 +20,7 @@ Install the `insomnia-plugin-save-variables` plugin from Preferences > Plugins.
 
 ![Image 2](/images/image-2.png)
 
-3. Notice there is no variable defined. Fix that by clicking "Manually Update Value"
+3. The Live Preview shows there is no variable defined. Fix that by clicking "Manually Update Value"
 and entering "blue" or a color of your choice. Now the variable shows the value that
 you entered.
 
@@ -38,8 +38,8 @@ a value on the right side.
 
 ![Image 4](/images/image-4.png)
 
-6. Notice the Live Preview shows base64 encoded text. This is an internal
-plugin detail that can be ignored. The header itself does not get sent with the request.
+6. The Live Preview shows base64 encoded text. This is an internal plugin detail that 
+can be ignored. The header itself does not get sent with the request.
 The plugin strips it off of the request before it is sent.
 
 7. Click "Send" a few times. Notice that the savedColor value changes each time. The
