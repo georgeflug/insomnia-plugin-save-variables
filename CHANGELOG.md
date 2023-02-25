@@ -1,5 +1,24 @@
 
 
+# [3.4.0](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.3.0...v3.4.0) (2023-02-25)
+
+
+### Bug Fixes
+
+* accurate upgrade instructions ([67354c3](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/67354c3ac1fd841a84660c9770ab9815c6999b41))
+* disable extractors for static/header sources ([5d46f98](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/5d46f988f1afb2158e3b3b1724ccf2609a30f495))
+* extractor args were not visible ([e66faa7](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/e66faa7fe30d66f1090c1b60243919bf2063da8c))
+
+
+### Features
+
+* add INFO logs for troubleshooting ([442a766](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/442a7662c8e717d091b8fee849b862c11f886d7f))
+* add support for JMESPath ([3191219](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/3191219c93ecd77967ca6351d16f8cd563da0267))
+* save variables from request body values ([008c853](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/008c85385050b2caeba7faf1bda2bd1715aad7ba))
+* save variables from request header values ([7d4e655](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/7d4e6552737ed6de6d95e1e35f7c47d3355b728a))
+* save variables from response status codes ([70ff10c](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/70ff10ccefd8c9740911ee302e55ceecdafec1b0))
+* use centralized logger ([3bee5f8](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/3bee5f893e0ee2d2e868194d587a83b486b0774e))
+
 # [3.3.0](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.2.2...v3.3.0) (2023-01-02)
 
 
