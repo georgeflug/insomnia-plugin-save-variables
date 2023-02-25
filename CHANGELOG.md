@@ -1,6 +1,12 @@
 
 
-# [3.4.0](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.3.0...v3.4.0) (2023-02-25)
+# [4.0.0](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v3.3.0...v4.0.0) (2023-02-25)
+
+### Breaking Changes
+
+This introduces new fields that are more granular and flexible than before. When upgrading to 4.0.0, you will need
+to click on each "Save Variable" header tag and review the information that the plugin supplies in the Live Preview.
+This will explain what to enter in the new fields to migrate the tag to the new version.
 
 
 ### Bug Fixes
