@@ -17,7 +17,7 @@ import { deletionResponseHook } from './response-hook/deletion/response-hook'
 jest.mock('sweetalert', () => ({}))
 
 describe('Test through entire system', () => {
-  it('should save json variable from response body', async () => {
+  it('should save variable from response body using JsonPath', async () => {
     const ticketNumber = 'ID-123'
     const workspaceId = 'wrk_23232323'
     const context = {
@@ -34,8 +34,38 @@ describe('Test through entire system', () => {
       variableName: 'ticketNumber',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.ticket',
+      workspaceId,
+    }
+    context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
+
+    await variableDeclarationHeaderRequestHook((context as unknown) as RequestHookContext)
+    await variableSavingResponseHook((context as unknown) as ResponseHookContext)
+    const result = await savedVariableTemplateTag.run((context as unknown) as TemplateRunContext, 'ticketNumber')
+
+    expect(result).toEqual(ticketNumber)
+  })
+
+  it('should save variable from response body using JMESPath', async () => {
+    const ticketNumber = 'ID-123'
+    const workspaceId = 'wrk_23232323'
+    const context = {
+      request: createMockHeaders(),
+      response: {
+        getBody: jest.fn().mockReturnValue(`{"ticket": "${ticketNumber}","other":"doesNotMatter"}`),
+      },
+      store: createMockStore(),
+      meta: {
+        workspaceId,
+      },
+    }
+    const variableDefinition: VariableDefinition = {
+      variableName: 'ticketNumber',
+      source: 'responseBody',
+      sourceArg: '',
+      extractor: 'jmesPath',
+      extractorArg: 'ticket',
       workspaceId,
     }
     context.request.setHeader(createVariableDefinitionHeader(variableDefinition), 'doesNotMatter')
@@ -128,7 +158,7 @@ describe('Test through entire system', () => {
       variableName: 'ticketNumber',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.ticket',
       workspaceId,
     }
@@ -168,7 +198,7 @@ describe('Test through entire system', () => {
       variableName: 'ticketNumber',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.ticket',
       workspaceId,
     }
@@ -211,7 +241,7 @@ describe('Test through entire system', () => {
       variableName: 'ticketNumber',
       source: 'requestBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.key',
       workspaceId,
     }

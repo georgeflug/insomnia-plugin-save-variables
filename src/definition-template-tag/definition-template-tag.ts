@@ -66,7 +66,7 @@ const legacyLookup: Record<string, { source: string; extractor: string | null }>
   },
   body: {
     source: 'responseBody',
-    extractor: 'json',
+    extractor: 'jsonPath',
   },
   bodyXml: {
     source: 'responseBody',

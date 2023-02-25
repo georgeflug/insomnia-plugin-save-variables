@@ -29,7 +29,7 @@ describe('Variable Declaration Header Request Hook', () => {
       variableName: 'myVar',
       source: 'responseBody',
       sourceArg: '$.id',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.id',
       workspaceId: 'wrk_213653457',
     }
@@ -55,7 +55,7 @@ describe('Variable Declaration Header Request Hook', () => {
       variableName: 'myVar',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.id',
     }
     const headerName = createVariableDefinitionHeader(variableDefinition)

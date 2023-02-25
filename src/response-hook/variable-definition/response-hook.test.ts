@@ -31,7 +31,7 @@ describe('Variable Saving Response Hook', () => {
       variableName,
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.ticketId',
       workspaceId,
     }
@@ -62,7 +62,7 @@ describe('Variable Saving Response Hook', () => {
       variableName: 'ticket',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$',
       workspaceId,
     }
@@ -83,7 +83,7 @@ describe('Variable Saving Response Hook', () => {
       variableName: 'ticket',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.doesNotExist',
       workspaceId,
     }
@@ -103,7 +103,7 @@ describe('Variable Saving Response Hook', () => {
       variableName: 'ticket',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.ticketId',
       workspaceId,
     }
@@ -123,7 +123,7 @@ describe('Variable Saving Response Hook', () => {
       variableName: 'ticket',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.ticketId',
       workspaceId,
     }

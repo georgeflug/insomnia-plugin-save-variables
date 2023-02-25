@@ -35,6 +35,7 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@release-it/conventional-changelog": "^5.1.1",
     "@types/jest": "^26.0.21",
+    "@types/jmespath": "^0.15.0",
     "@types/jsonpath-plus": "^5.0.2",
     "@types/xmldom": "^0.1.31",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
@@ -51,6 +52,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "jmespath": "^0.16.0",
     "jsonpath-plus": "^6.0.1",
     "sweetalert": "^2.1.2",
     "xmldom": "^0.6.0",

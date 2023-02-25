@@ -11,7 +11,7 @@ describe('Variable Definition Header Format', () => {
       variableName: 'test',
       source: 'responseBody',
       sourceArg: '',
-      extractor: 'json',
+      extractor: 'jsonPath',
       extractorArg: '$.test',
       workspaceId: 'wrk_4efc4e7c4dea494ebb4d0280138c8893',
     } as VariableDefinition

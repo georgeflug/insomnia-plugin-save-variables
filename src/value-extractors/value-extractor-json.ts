@@ -2,9 +2,9 @@ import { JSONPath } from 'jsonpath-plus'
 import { ValueExtractor } from './value-extractor'
 
 export const valueExtractorJson: ValueExtractor = {
-  type: 'json',
-  displayName: 'JSON',
-  argumentName: 'JSON Path',
+  type: 'jsonPath',
+  displayName: 'JSONPath',
+  argumentName: 'JSONPath Query',
   extract: async (sourceValue: string, extractionArgument: string): Promise<string | null | undefined> => {
     const object = JSON.parse(sourceValue)
     return JSONPath<string>({
