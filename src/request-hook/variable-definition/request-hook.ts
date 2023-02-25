@@ -5,6 +5,7 @@ import {
 import { pluginGlobal } from '../../global/plugin-global'
 import { RequestHook } from '../../insomnia/types/request-hook'
 import { RequestHookContext } from '../../insomnia/types/request-hook-context'
+import { log, LogLevel } from '../../logger/log'
 
 export const variableDeclarationHeaderRequestHook: RequestHook = async (context: RequestHookContext) => {
   const headers = context.request.getHeaders()
@@ -13,4 +14,7 @@ export const variableDeclarationHeaderRequestHook: RequestHook = async (context:
   const variableDefinitions = customHeaderNames.map(parseVariableDefinitionHeader)
   pluginGlobal.currentRequestVariableDefinitions = variableDefinitions
   pluginGlobal.currentRequestContext = context
+  variableDefinitions.forEach(def => {
+    log(LogLevel.INFO, `Virtual Header for variable "${def.variableName}" detected.`)
+  })
 }

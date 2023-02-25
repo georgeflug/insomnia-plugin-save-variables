@@ -24,6 +24,9 @@ async function deleteVariables(definitions: DeletionDefinition[], statusCode: nu
     if (regex.test(statusCode + '')) {
       const storeItemName = getVariableKey(def.workspaceId, def.variableName)
       await context.store.removeItem(storeItemName)
+      log(LogLevel.INFO, `Deleted Variable: ${def.variableName}`)
+    } else {
+      log(LogLevel.INFO, `Variable "${def.variableName}" not deleted because status code did not match filter`)
     }
   })
   await Promise.all(promises)
