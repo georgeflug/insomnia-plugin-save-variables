@@ -55,7 +55,7 @@
     "jmespath": "^0.16.0",
     "jsonpath-plus": "^6.0.1",
     "sweetalert": "^2.1.2",
-    "xmldom": "^0.6.0",
+    "@xmldom/xmldom": "~0.8.10",
     "xpath": "^0.0.32"
   }
 }
