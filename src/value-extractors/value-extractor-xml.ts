@@ -1,5 +1,5 @@
 import { ValueExtractor } from './value-extractor'
-import { DOMParser } from 'xmldom'
+import { DOMParser } from '@xmldom/xmldom'
 import { select } from 'xpath'
 
 export const valueExtractorXml: ValueExtractor = {
