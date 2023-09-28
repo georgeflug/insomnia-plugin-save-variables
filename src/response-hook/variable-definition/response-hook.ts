@@ -40,12 +40,8 @@ async function saveVariable(
     value = await extractor.extract(value, def.extractorArg ?? '')
   }
 
-  if (value !== undefined) {
-    const result = value === null ? null : value.toString()
-    const key = getVariableKey(def.workspaceId, def.variableName)
-    await context.store.setItem(key, result)
-    log(LogLevel.INFO, `Saved Variable: ${def.variableName} -> ${result}`)
-  } else {
-    log(LogLevel.INFO, `Skipped Variable because result was "undefined": ${def.variableName}`)
-  }
+  const result = value === null ? 'null' : value === undefined ? 'undefined' : value.toString()
+  const key = getVariableKey(def.workspaceId, def.variableName)
+  await context.store.setItem(key, result)
+  log(LogLevel.INFO, `Saved Variable: ${def.variableName} -> ${result}`)
 }

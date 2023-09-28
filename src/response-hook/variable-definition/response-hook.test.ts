@@ -23,6 +23,7 @@ describe('Variable Saving Response Hook', () => {
 
   beforeEach(async () => {
     await store.clear()
+    pluginGlobal.currentRequestContext = {} as RequestHookContext
   })
 
   it('should read the response body value into a variable using json path', async () => {
@@ -40,7 +41,6 @@ describe('Variable Saving Response Hook', () => {
       ticketId: '123',
     }
     pluginGlobal.currentRequestVariableDefinitions = [variableDefinition]
-    pluginGlobal.currentRequestContext = {} as RequestHookContext
     getBodyMock.mockReturnValue(JSON.stringify(body))
 
     await variableSavingResponseHook(context)
@@ -78,7 +78,7 @@ describe('Variable Saving Response Hook', () => {
     expect(await store.hasItem('variableDefinitions')).toEqual(false)
   })
 
-  it('should not save variable if key cannot be found at path specified by json path', async () => {
+  it('should set variable to undefined if key cannot be found at path specified by json path', async () => {
     const variableDefinition: VariableDefinition = {
       variableName: 'ticket',
       source: 'responseBody',
@@ -95,7 +95,9 @@ describe('Variable Saving Response Hook', () => {
 
     await variableSavingResponseHook(context)
 
-    expect(await store.all()).toEqual([])
+    const key = getVariableKey(variableDefinition.workspaceId, variableDefinition.variableName)
+    const actual = await store.getItem(key)
+    expect(actual).toEqual('undefined')
   })
 
   it('should save variable if value at key is expicitly null', async () => {
@@ -115,7 +117,9 @@ describe('Variable Saving Response Hook', () => {
 
     await variableSavingResponseHook(context)
 
-    expect(await store.getItem('variable-ticket')).toEqual(null)
+    const key = getVariableKey(variableDefinition.workspaceId, variableDefinition.variableName)
+    const actual = await store.getItem(key)
+    expect(actual).toEqual('null')
   })
 
   it('should not save variable if response body cannot be parsed as json', async () => {
