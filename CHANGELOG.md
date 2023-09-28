@@ -1,5 +1,12 @@
 
 
+## [4.0.5](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.4...v4.0.5) (2023-09-28)
+
+
+### Bug Fixes
+
+* downgrade @release-it/conventional-changelog because latest version breaks release-it ([b037667](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/b03766723b83edf13251444e8c5f55b98899eeca))
+
 ## [4.0.4](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.3...v4.0.4) (2023-09-28)
 
 ## [4.0.3](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.2...v4.0.3) (2023-09-20)
