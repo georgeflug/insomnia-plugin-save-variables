@@ -33,7 +33,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
-    "@release-it/conventional-changelog": "^7.0.2",
+    "@release-it/conventional-changelog": "7.0.0",
     "@types/jest": "^26.0.21",
     "@types/jmespath": "^0.15.0",
     "@types/jsonpath-plus": "^5.0.2",
