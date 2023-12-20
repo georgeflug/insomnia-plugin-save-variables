@@ -84,6 +84,16 @@ environment variables and are not exported.
 
 Variables are scoped to the current workspace/collection.
 
+### How to "Save" values to an environment variable
+
+The Insomnia plugin API does not have a way to save values directly to environment variables,
+but with a workaround you can get a similar experience.
+
+Simply create an environment variable that uses the "Variable" template tag as its value.
+This allows you to access a saved variable by using the environment variable.
+
+![Environment Variables](images/env-var.png)
+
 ## Troubleshooting
 Open the Developer Tools in Insomnia and review the console logs sent by this plugin.
 A log entry will appear for each variable that the plugin attempted to save.
