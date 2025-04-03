@@ -4,7 +4,7 @@ export type ResponseContext = {
   getStatusMessage(): string
   getBytesRead(): number
   getTime(): number
-  getBody(): Buffer | null
+  getBody(): Buffer | null | Promise<Buffer | null>
   setBody(body: Buffer): void
   getHeader(name: string): string | Array<string> | null
   hasHeader(name: string): boolean
