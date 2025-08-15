@@ -54,7 +54,7 @@
   "dependencies": {
     "@xmldom/xmldom": "~0.8.10",
     "jmespath": "^0.16.0",
-    "jsonpath-plus": "^6.0.1",
+    "jsonpath-plus": "^10.3.0",
     "sweetalert": "^2.1.2",
     "xpath": "^0.0.32"
   }
