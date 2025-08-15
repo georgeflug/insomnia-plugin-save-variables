@@ -1,5 +1,12 @@
 
 
+## [4.0.12](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.11...v4.0.12) (2025-08-15)
+
+
+### Bug Fixes
+
+* job not appearing in settings for GitHub PR Checks ([aa9a9ff](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/aa9a9ff4a7c3177ea7a20432e262b833e410b4a9))
+
 ## [4.0.11](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.10...v4.0.11) (2025-08-15)
 
 ## [4.0.10](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.9...v4.0.10) (2025-08-15)
