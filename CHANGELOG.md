@@ -1,5 +1,12 @@
 
 
+## [4.0.8](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.7...v4.0.8) (2025-08-15)
+
+
+### Bug Fixes
+
+* update ResponseContextHook.getBody ([5bc6686](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/5bc66866514b5094ced00fb2d0bebc8d79fb4139))
+
 ## [4.0.7](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.6...v4.0.7) (2023-12-20)
 
 ## [4.0.6](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.5...v4.0.6) (2023-12-20)
