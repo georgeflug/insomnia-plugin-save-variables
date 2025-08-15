@@ -11,6 +11,7 @@ export const valueSourceResponseBody: ValueSource = {
     _request: RequestHookContext,
     response: ResponseHookContext,
   ): Promise<string | null | undefined> => {
-    return response.response.getBody()?.toString('utf-8') || ''
+    const body = (await response.response.getBody()) || ''
+    return body.toString('utf-8') || ''
   },
 }
