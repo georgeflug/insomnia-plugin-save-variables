@@ -100,6 +100,8 @@ A log entry will appear for each variable that the plugin attempted to save.
 
 ## Development
 
+### Setup
+
 Create a `.env` file in this repo with the following contents:
 ```
 # Set to the location of the insomnia plugins folder (in Insomnia, go to
@@ -113,3 +115,17 @@ PLUGINS_DIRECTORY=/mnt/c/Users/your_username/AppData/Roaming/insomnia/plugins
 
 To install the plugin into Insomnia locally, run `install-plugin.sh`, then
 refresh plugins in Insomnia or restart Insomnia.
+
+### Commands
+
+Lint: npm run lint
+
+Build: npm run build
+
+Test: npm run test
+
+Install Plugin: ./install-plugin.sh
+
+### Commits
+
+Commit messages must follow [Conventional Commit](https://github.com/TrigenSoftware/simple-release/blob/main/GUIDE.md#basic-structure) format.
