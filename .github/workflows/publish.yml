@@ -64,6 +64,11 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+      
+      - name: Configure Git authentication
+        run: |
+          git remote set-url origin https://x-access-token:${{secrets.REPO_PAT}}@github.com/georgeflug/insomnia-plugin-save-variables.git
+      
       - run: npm run release -- --npm.skipChecks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
