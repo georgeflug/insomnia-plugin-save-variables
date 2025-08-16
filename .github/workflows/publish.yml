@@ -50,11 +50,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ secrets.REPO_PAT }}
 
       - name: git config
         run: |
-          git config user.name "${GITHUB_ACTOR}"
-          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       # https://github.com/marketplace/actions/setup-node-js-environment
       - uses: actions/setup-node@v3
@@ -65,11 +66,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       
-      - name: Configure Git authentication
-        run: |
-          git remote set-url origin https://x-access-token:${{secrets.REPO_PAT}}@github.com/${{ github.repository }}.git
-      
-      - run: npm run release -- --npm.skipChecks
+      - run: npm run release -- --npm.skipChecks --no-npm.publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
           GITHUB_TOKEN: ${{secrets.REPO_PAT}}
