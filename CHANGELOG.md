@@ -1,5 +1,7 @@
 
 
+## [4.0.285](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.284...v4.0.285) (2025-08-16)
+
 ## [4.0.284](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.283...v4.0.284) (2025-08-16)
 
 ## [4.0.283](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.282...v4.0.283) (2025-08-16)
