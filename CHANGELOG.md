@@ -1,5 +1,15 @@
 
 
+## [4.0.13](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.11...v4.0.13) (2025-08-16)
+
+
+### Bug Fixes
+
+* codeql warning about job permissions [skip ci] ([2ae0aac](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/2ae0aacc662193c172bc2d39fc9626498da27c3a))
+* job not appearing in settings for GitHub PR Checks ([aa9a9ff](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/aa9a9ff4a7c3177ea7a20432e262b833e410b4a9))
+* version bump works when PR rules exist on repo ([30b3317](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/30b33174dc177ad2719402f931b723329b9bbf80))
+* version out-of-date due to failed build [skip ci] ([516567f](https://github.com/georgeflug/insomnia-plugin-save-variables/commit/516567faa43b8319b4e192d94c29ff0f02132e0b))
+
 ## [4.0.11](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.10...v4.0.11) (2025-08-15)
 
 ## [4.0.10](https://github.com/georgeflug/insomnia-plugin-save-variables/compare/v4.0.9...v4.0.10) (2025-08-15)
