@@ -1,0 +1,25 @@
+name: Approve Dependabot
+on: pull_request
+
+permissions:
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+
+    # the repository check below is a safety measure for folks who fork the repo to ensure this workflow does not auto approve stuff in their repo
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'georgeflug/insomnia-plugin-save-variables'
+
+    steps:
+      - name: Enable Auto-Merge on PR
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: gh pr merge --auto --merge "$PR_URL"
+
+      - name: Approve PR
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: gh pr review --approve "$PR_URL"
