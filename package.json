@@ -1,6 +1,6 @@
 {
   "name": "insomnia-plugin-save-variables",
-  "version": "4.0.43",
+  "version": "4.0.44",
   "description": "An Insomnia Plugin that saves values from responses into variables",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
